@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export default function Welcome() {
     return (
-        <div className="welcome">
+        <div className="welcome" id="home">
 
             <Image src="/images/NIDEiMAGE.JPG" alt="nideimage" width={200} height={200} />
             <p>Hi, I am Niyomwungeri Parmenide Ishimwe

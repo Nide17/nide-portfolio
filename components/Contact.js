@@ -1,6 +1,6 @@
 export default function Contact() {
     return (
-        <div className="contact">
+        <div className="contact" id="contact">
             <div className="contact-text">
                 Want to discuss about a project or something else? Do not hesitate to contact me, I am always open to hear from you!
             </div>

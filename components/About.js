@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
 export default function About() {
-    return (<div className="about">
+    return (<div className="about" id="about">
         <div className="bio">
             <p>Hello, this is Niyomwungeri Parmenide Ishimwe!
                 I am a full-stack web developer from Kigali, Rwanda.

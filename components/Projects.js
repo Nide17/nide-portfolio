@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export default function Projects() {
 
-    return (<div className="projects">
+    return (<div className="projects" id="projects">
         <div className="projects-list">
             <div className="elysiumgroupltd">
                 <Link href="/projects/elysiumgroupltd">
