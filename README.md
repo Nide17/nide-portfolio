@@ -9,7 +9,7 @@ This is my new portfolio using Next.js
 
 ### Installation
 
-- Clone the app at 
+- Clone the app at https://github.com/Nide17/nide-portfolio.git
 
 ### Install all the packages
 
