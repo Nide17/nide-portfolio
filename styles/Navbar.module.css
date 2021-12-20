@@ -3,6 +3,7 @@
   height: 5rem;
   display: flex;
   justify-content: space-around;
+  align-items: center;
   padding: 1rem 0;
 }
 
@@ -33,7 +34,7 @@
   list-style: none;
   padding: 0 1.2rem;
   letter-spacing: 0.3rem;
-  transform: scale(0.8, 1.1);
+  transform: scale(0.9, 1.1);
 }
 
 .links li:hover {
@@ -51,4 +52,40 @@
 
 .links li span:hover {
   text-decoration-line: none;
+}
+
+@media screen and (max-width: 600px) {
+  .navbar {
+    height: 4rem;
+    padding: 0.2rem 3rem;
+  }
+
+  .brand {
+    color: #1b4f72;
+    font-size: 1rem;
+    padding: .2rem;
+    height: fit-content;
+    border: 0.1px solid aquamarine;
+  }
+
+  .brand span {
+    padding: 0;
+  }
+
+  .links li {
+    padding: 0 0.25rem;
+    letter-spacing: 0.03rem;
+    transform: scale(.9, 1.1);
+    font-size: 0.7rem;
+  }
+
+  .links li span {
+    text-decoration-line: underline;
+    text-underline-offset: 0.3rem;
+    text-decoration-thickness: 0.08rem;
+  }
+
+  .links li span:hover {
+    text-decoration-line: none;
+  }
 }
