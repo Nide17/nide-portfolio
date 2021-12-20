@@ -1,0 +1,101 @@
+.welcome {
+  height: calc(100vh - 5rem);
+  background: rgb(2, 0, 36);
+  background: radial-gradient(
+    circle,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(27, 79, 114, 1) 0%,
+    rgba(0, 212, 255, 1) 100%
+  );
+}
+
+.welcome div:first-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60%;
+}
+
+.welcome div:first-child img {
+  border-radius: 50%;
+  border: 5px solid aquamarine !important;
+}
+
+.welcome div:first-child img:hover {
+  border-radius: 50%;
+  transform: scale(0.93, 0.93);
+  transition: 600ms;
+}
+
+.welcome div:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: .5rem;
+  color: rgb(255, 255, 255);
+}
+
+.welcome div:nth-child(2) p:first-child {
+  font-size: 2rem;
+  font-weight: bolder;
+  margin: .5rem auto;
+}
+
+.welcome div:nth-child(2) p:nth-child(2) {
+  font-size: 1rem;
+  font-weight: bolder;
+  color: aquamarine;
+}
+
+.dev, .des, .eng {
+  display: inline-block;
+}
+
+.typewriter {
+  font-size: .9rem;
+  margin-top: 1%;
+}
+
+.typewriter .dev div:first-child {
+  font-size: .9;
+  overflow: hidden;
+  border-right: 0.15em solid orange;
+  white-space: nowrap;
+  width: 0;
+  animation: typing 1.3s steps(25, end) forwards;
+}
+
+.typewriter .des div:first-child {
+  font-size: .9;
+  overflow: hidden;
+  border-right: 0.15em solid orange;
+  white-space: nowrap;
+  width: 0;
+  animation: typing 1.3s steps(25, end) forwards;
+  animation-delay: 1s;
+}
+.typewriter .eng div:first-child {
+  font-size: .9;
+  overflow: hidden;
+  border-right: 0.15em solid orange;
+  white-space: nowrap;
+  width: 0;
+  animation: typing 1.3s steps(25, end) forwards;
+  animation-delay: 2s;
+}
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+@keyframes blink {
+  from {
+    border-color: transparent;
+  }
+  to {
+    border-color: orange;
+  }
+}
