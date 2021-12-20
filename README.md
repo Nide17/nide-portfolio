@@ -1,5 +1,6 @@
-# nide-portfolio
-This is my new portfolio using Next.js
+# This is my portfolio using Next.js
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## To get started
 
@@ -17,7 +18,15 @@ This is my new portfolio using Next.js
 
 ### Run the server
 
-- npm run dev
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ### Testing
 
