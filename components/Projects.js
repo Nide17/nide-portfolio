@@ -8,7 +8,7 @@ export default function Projects() {
             <div className="elysiumgroupltd">
                 <Link href="/projects/elysiumgroupltd">
                     <a>
-                        <Image src='/images/profilepic.jpeg' alt='Elysium Group Ltd' width={200} height={200}></Image>
+                        <Image src='/images/profilepic.jpg' alt='Elysium Group Ltd' width={200} height={200}></Image>
                         <button className="tools-round">React.js</button>
                         <button className="tools-round">Node.js</button>
                         <button className="tools-round">Express.js</button>
@@ -20,7 +20,7 @@ export default function Projects() {
             <div className="quizblog">
                 <Link href="/projects/quizblog">
                     <a>
-                        <Image src='/images/profilepic.jpeg' alt='Quiz Blog' width={200} height={200}></Image>
+                        <Image src='/images/profilepic.jpg' alt='Quiz Blog' width={200} height={200}></Image>
                         <button className="tools-round">React.js</button>
                         <button className="tools-round">Node.js</button>
                         <button className="tools-round">Express.js</button>
@@ -32,7 +32,7 @@ export default function Projects() {
             <div className="okaziyo">
                 <Link href="/projects/okaziyo">
                     <a>
-                        <Image src='/images/profilepic.jpeg' alt='Okaziyo' width={200} height={200}></Image>
+                        <Image src='/images/profilepic.jpg' alt='Okaziyo' width={200} height={200}></Image>
                         <button className="tools-round">React.js</button>
                         <button className="tools-round">Node.js</button>
                         <button className="tools-round">Express.js</button>

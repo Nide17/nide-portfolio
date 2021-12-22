@@ -13,7 +13,7 @@
   font-weight: 900;
   display: flex;
   align-items: center;
-  border: 2px solid aquamarine;
+  border: 2px solid rgb(3, 159, 190);
   border-radius: 8px;
 }
 
@@ -40,14 +40,14 @@
 .links li:hover {
   transform: translateY(-1px);
   transition: 400ms;
-  color: aquamarine;
+  color: rgb(3, 159, 190);
 }
 
 .links li span {
   text-decoration-line: underline;
   text-underline-offset: 0.5rem;
   text-decoration-thickness: 0.12rem;
-  text-decoration-color: aquamarine;
+  text-decoration-color: rgb(3, 159, 190);
 }
 
 .links li span:hover {
@@ -65,7 +65,7 @@
     font-size: 1rem;
     padding: 0.2rem;
     height: fit-content;
-    border: 0.1px solid aquamarine;
+    border: 0.1px solid #1b4f72;
   }
 
   .brand span {

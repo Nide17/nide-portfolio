@@ -1,12 +1,17 @@
 import Image from 'next/image'
+import aboutStyles from '../styles/About.module.css'
 
 export default function About() {
-    return (<div className="about" id="about">
-        <div className="bio">
-            <p>Hello, this is Niyomwungeri Parmenide Ishimwe!
-                I am a full-stack web developer from Kigali, Rwanda.
 
-                With HTML/CSS, React.js, Next.js, Bootstrap on the front-end, I create nice UI for the web. and NodeJS, Express, MongoDB, PHP/MySQL and PostgreSQL on the Back-end</p>
+    return (
+    
+        <div className={aboutStyles.about} id="about">
+
+        <div className={aboutStyles.bio}>
+
+                <h2>A<span>bout Me</span></h2>
+
+                <p>I am a Full-stack Software Developer from Kigali-Rwanda, specializing mostly with the front-end and the back-end development. Experienced with all stages of the development cycle for dynamic software projects. I love to solve problems through software using HTML/CSS, React.js, Redux, Next.js, Bootstrap on the front-end to create nice UI for the web; and Node.js, Express.js, Python/Flask, MongoDB and PostgreSQL for back-end development</p>
 
             <small>
                 <blockquote>
@@ -15,8 +20,8 @@ export default function About() {
             </small>
         </div>
 
-        <div className="profile-pic">
-            <Image src="/images/profilepic.jpeg" alt="profilepic" width={200} height={200} />
+            <div className={aboutStyles.profilePic}>
+            <Image src="/images/profilepic.jpg" alt="profilepic" width={300} height={300} />
         </div>
     </div>)
 };
