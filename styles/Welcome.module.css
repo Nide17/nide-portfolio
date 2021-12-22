@@ -54,7 +54,6 @@
 }
 
 .typewriter {
-  /* font-size: 0.9rem; */
   text-align: end;
   margin-top: 1%;
   font-weight: bolder;
@@ -75,7 +74,8 @@
 }
 
 .des div {
-  animation-delay: 3.5s;
+  animation-delay: 3.5s; 
+
 }
 .eng div {
   animation-delay: 7s;
@@ -95,4 +95,42 @@
   to {
     border-color: orange;
   }
+}
+
+
+@media screen and (max-width: 600px) {
+.welcome {
+  height: calc(100vh - 4rem);
+}
+
+.myimage {
+  height: 65%;
+}
+
+.mytext {
+  padding-top: 0.3rem;
+}
+
+.mytext p:first-child {
+  font-size: .8rem;
+  line-height: 1.5;
+  text-align: center;
+  margin: 0.3rem auto;
+}
+
+.iam {
+  font-size: .7rem;
+}
+
+.typewriter {
+    margin-top: 5%;
+  text-align: center;
+}
+
+.dev div,
+.des div,
+.eng div {
+  font-size: .7rem;
+  margin-bottom: 0;
+}
 }
