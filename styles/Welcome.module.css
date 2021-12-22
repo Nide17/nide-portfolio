@@ -48,13 +48,14 @@
 }
 
 .iam {
+    font-size: 1.2rem;
   text-align: center;
   margin-right: 1rem;
   color: #fff;
 }
 
 .typewriter {
-  text-align: end;
+  text-align: left;
   margin-top: 1%;
   font-weight: bolder;
   color: aquamarine;
@@ -64,23 +65,29 @@
 .des div,
 .eng div {
   font-size: 1.2rem;
-  margin-bottom: .4rem;
+  margin-bottom: 0.4rem;
+  padding-right: 0;
   overflow: hidden;
-  border-right: 0.15em solid orange;
+  border-right: 0.15em solid aquamarine;
   white-space: nowrap;
   width: 0;
-  animation: typing 3s steps(25, end) forwards;
   text-decoration: underline;
 }
 
-.des div {
-  animation-delay: 3.5s; 
+.dev div {
+  animation: typing1 3s steps(25, end) forwards, blinking1 1.1s infinite;
+}
 
+.des div {
+  animation: typing2 3s steps(25, end) forwards, blinking2 1.1s infinite;
+  animation-delay: 3.5s;
 }
 .eng div {
+  animation: typing3 3s steps(25, end) forwards, blinking3 1.1s infinite;
   animation-delay: 7s;
 }
-@keyframes typing {
+
+@keyframes typing1 {
   from {
     width: 0;
   }
@@ -88,49 +95,87 @@
     width: 100%;
   }
 }
-@keyframes blink {
+
+@keyframes typing2 {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes typing3 {
+  from {
+    width: 0;
+    padding-right: 0;
+  }
+  to {
+    width: 100%;
+    padding-right: 0.2rem;
+  }
+}
+
+@keyframes blinking1 {
   from {
     border-color: transparent;
   }
   to {
-    border-color: orange;
+    border-color: transparent;
   }
 }
 
+@keyframes blinking2 {
+  from {
+    border-color: transparent;
+  }
+  to {
+    border-color: transparent;
+  }
+}
+
+@keyframes blinking3 {
+  from {
+    border-color: transparent;
+  }
+  to {
+    border-color: aquamarine;
+  }
+}
 
 @media screen and (max-width: 600px) {
-.welcome {
-  height: calc(100vh - 4rem);
-}
+  .welcome {
+    height: calc(100vh - 4rem);
+  }
 
-.myimage {
-  height: 65%;
-}
+  .myimage {
+    height: 65%;
+  }
 
-.mytext {
-  padding-top: 0.3rem;
-}
+  .mytext {
+    padding-top: 0.3rem;
+  }
 
-.mytext p:first-child {
-  font-size: .8rem;
-  line-height: 1.5;
-  text-align: center;
-  margin: 0.3rem auto;
-}
+  .mytext p:first-child {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    text-align: center;
+    margin: 0.3rem auto;
+  }
 
-.iam {
-  font-size: .7rem;
-}
+  .iam {
+    font-size: 0.7rem;
+  }
 
-.typewriter {
+  .typewriter {
     margin-top: 5%;
-  text-align: center;
-}
+    text-align: center;
+  }
 
-.dev div,
-.des div,
-.eng div {
-  font-size: .7rem;
-  margin-bottom: 0;
-}
+  .dev div,
+  .des div,
+  .eng div {
+    font-size: 0.7rem;
+    margin-bottom: 0;
+  }
 }

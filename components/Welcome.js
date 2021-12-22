@@ -17,15 +17,15 @@ export default function Welcome() {
 
                     <br />
                     <div className={welcomeStyles.dev}>
-                        <div className="developer">Software Developer</div></div>
+                        <div className="developer">- Software Developer</div></div>
 
                     <br />
                     <div className={welcomeStyles.des}>
-                        <div className="designer">Software Designer</div></div>
+                        <div className="designer">- Software Designer</div></div>
 
                     <br />
                     <div className={welcomeStyles.eng}>
-                        <div className="engineer">IT Support Engineer</div></div>
+                        <div className="engineer">- IT Support Engineer</div></div>
 
                     <br />
                 </p>
