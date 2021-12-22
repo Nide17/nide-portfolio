@@ -18,10 +18,6 @@ export default function Navbar() {
                 <li><Link href="#projects"><a>P<span>rojects</span></a></Link></li>
                 <li><Link href="#contact"><a>C<span>ontact</span></a></Link></li>
             </ul>
-
-            <a href="javascript:void(0);" className="icon" onClick="myFunction()">
-                <i className="fa fa-bars"></i>
-            </a>
         </nav>
     )
 };
