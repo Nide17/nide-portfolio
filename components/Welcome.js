@@ -5,19 +5,19 @@ export default function Welcome() {
     return (
         <div className={welcomeStyles.welcome} id="home">
 
-            <div className="myimage">
+            <div className={welcomeStyles.myimage}>
                 <Image src="/images/NIDEiMAGE.JPG" alt="nideimage" width={280} height={280} />
             </div>
 
-            <div className="my-text">
-                <p>Hi, I am Niyomwungeri Parmenide Ishimwe</p>
+            <div className={welcomeStyles.mytext}>
+                <p>Hi, I am called Niyomwungeri Parmenide Ishimwe</p>
 
                 <p className={welcomeStyles.typewriter}>
-                    I am a
+                    <div className={welcomeStyles.iam}>I am a</div>
 
                     <br />
                     <div className={welcomeStyles.dev}>
-                        <div className="developer">Web Developer</div></div>
+                        <div className="developer">Software Developer</div></div>
 
                     <br />
                     <div className={welcomeStyles.des}>
