@@ -1,0 +1,36 @@
+.projects {
+  display: block;
+}
+
+.projectsList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.listItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 33.333%;
+  text-align: center;
+}
+
+.listItem a, .listItem a span {
+    width: 100%;
+}
+
+.listItem a img {
+    display: block;
+    max-width: 100%;
+}
+
+.toolsBtn {
+display: flex;
+    justify-content: center;
+}
+
+.toolsBtn button {
+margin: 1rem .5rem .5rem .5rem;
+}
