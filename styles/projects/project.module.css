@@ -1,0 +1,213 @@
+.viewProject {
+  margin: 0 !important;
+}
+
+.projectHeader {
+  height: calc(100vh - 10rem);
+  background: rgb(2, 0, 36);
+  background: radial-gradient(
+    circle,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(27, 79, 114, 1) 0%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.projectHeader h1 {
+  font-size: 2.2rem;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  text-transform: uppercase;
+  font-weight: bolder;
+}
+
+.projectHeader p {
+  font-size: 1.2rem;
+  color: aquamarine;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: bolder;
+  border: 1px solid aquamarine;
+  border-radius: 0.3rem;
+  padding: 0.5rem;
+}
+
+.projectContent {
+  background-color: rgb(241, 240, 240);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.description {
+  display: inline-block;
+  width: 50%;
+  margin: 0;
+  padding: 2rem 5rem;
+}
+
+.description h2 {
+  color: #1b4f72;
+  text-align: left;
+  margin-left: 0;
+  margin-bottom: 2rem;
+}
+
+.description h2 span {
+  text-decoration-line: underline;
+  text-underline-offset: 0.4rem;
+  text-decoration-thickness: 0.3rem;
+  text-decoration-color: rgb(3, 159, 190);
+}
+
+.description p {
+  font-size: 0.9rem;
+  line-height: 1.2;
+  text-align: left;
+}
+
+.pImages {
+  display: inline-block;
+  width: 50%;
+  margin: 1rem;
+  padding: 1rem;
+  border: 1px solid rgb(3, 159, 190);
+  border-radius: 0.5rem;
+  background-color: rgb(221, 221, 221);
+}
+
+.pImages a {
+  display: block;
+  color: rgb(3, 159, 190);
+  font-weight: bolder;
+  text-decoration: underline;
+  text-align: center;
+  margin: 1rem auto 0 auto;
+}
+
+.pImages img {
+  display: block;
+  max-width: 100%;
+  border: 5px solid #fff !important;
+  border-radius: 0.3rem;
+}
+
+.pImages img:hover {
+  transform: translateY(2px);
+  transition: 600ms;
+}
+
+.techNvisit {
+  display: inline-block;
+  width: 100%;
+  margin: 0;
+  padding: 1rem;
+}
+
+.techNvisit div {
+  margin: 0 auto;
+  width: 42%;
+}
+
+.techNvisit p {
+  color: rgb(3, 159, 190);
+  font-weight: bolder;
+  padding-bottom: 0;
+  text-align: left;
+  font-size: 0.7rem;
+  margin: 1rem auto 0 auto;
+}
+
+.techNvisit p span {
+  color: #0d2331;
+}
+
+@media screen and (max-width: 600px) {
+  .projectHeader {
+    height: calc(100vh - 17rem);
+  }
+
+  .projectHeader h1 {
+    font-size: 1.4rem;
+    font-weight: bold;
+  }
+
+  .projectHeader p {
+    font-size: 1rem;
+    border-radius: 0.3rem;
+    padding: 0.4rem;
+  }
+
+  .projectContent {
+    display: block;
+  }
+
+  .description {
+    width: 100%;
+    padding: 1rem;
+    display: block;
+  }
+
+  .description h2 {
+    text-align: center;
+    margin-bottom: 1.3rem;
+  }
+
+  .description h2 span {
+    text-underline-offset: 0.3rem;
+    text-decoration-thickness: 0.2rem;
+  }
+
+  .description p {
+    font-size: 0.7rem;
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  .pImages {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 1rem;
+    border: none;
+    border-radius: 0;
+    background-color: rgb(221, 221, 221);
+  }
+
+  .pImages a {
+    display: block;
+    font-weight: bold;
+    margin: 1rem auto 0 auto;
+    font-size: 0.8rem;
+  }
+
+  .pImages img {
+    display: block;
+    max-width: 100%;
+    border: 5px solid #fff !important;
+    border-radius: 0.3rem;
+  }
+
+  .techNvisit {
+    padding: 0.5rem;
+  }
+
+  .techNvisit div {
+    width: 100%;
+  }
+
+  .techNvisit p {
+    font-weight: bold;
+    padding-bottom: 0;
+    text-align: center;
+    font-size: 0.7rem;
+    line-height: 1.5;
+    margin: 1rem auto 0 auto;
+  }
+}

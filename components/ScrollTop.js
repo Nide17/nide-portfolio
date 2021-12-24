@@ -1,12 +1,16 @@
-import ScrollTopView from '../pages/_view'
+import ScrollTopView from '../pages/_scrollView'
 import { createElement, useState } from 'react'
 
 const ScrollTop = () => {
+
     const [visible, setVisible] = useState(false)
 
-    const onVisbile = () => {
+    const onVisible = () => {
+
         const scrolled = document.documentElement.scrollTop
+
         if (scrolled >= 600) setVisible(true)
+
         else if (scrolled <= 300) setVisible(false)
     }
 
@@ -16,7 +20,7 @@ const ScrollTop = () => {
 
     return createElement(ScrollTopView, {
         onScroll,
-        onVisbile,
+        onVisible,
         visible
     })
 }

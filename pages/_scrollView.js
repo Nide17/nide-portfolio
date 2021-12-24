@@ -1,10 +1,9 @@
 import Image from 'next/image'
 
 const ScrollTopView = (props) => {
-    const { onScroll, onVisbile, visible } = props
+    const { onScroll, onVisible, visible } = props
 
-    console.log(visible)
-    if (typeof window === 'object') window.addEventListener('scroll', onVisbile)
+    if (typeof window === 'object') window.addEventListener('scroll', onVisible)
 
     return (
         <>
