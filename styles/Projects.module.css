@@ -77,3 +77,40 @@
   font-size: 0.7rem;
   padding: 0.2rem 0.3rem;
 }
+
+@media screen and (max-width: 600px) {
+  .projects {
+    padding: 1rem 0.5rem;
+  }
+
+  .projects h2 {
+    text-align: center;
+    margin-left: 0;
+    margin-bottom: 1rem;
+  }
+
+  .projects h2 span {
+    text-underline-offset: 0.3rem;
+    text-decoration-thickness: 0.2rem;
+  }
+
+  .listItem {
+    width: 90%;
+    padding: 0.7rem;
+    margin: 0.4rem;
+  }
+
+  .listItem a img {
+    border: 3px solid #fff !important;
+  }
+
+  .listItem h5 {
+    margin: 0.4rem auto;
+  }
+
+  .toolsBtn button {
+    margin: 0.2rem;
+    font-size: 0.55rem;
+    padding: 0.08rem 0.2rem;
+  }
+}
