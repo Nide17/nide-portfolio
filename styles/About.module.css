@@ -64,7 +64,7 @@
 
 @media screen and (max-width: 600px) {
   .about {
-    height: calc(100vh + 3rem);
+    height: calc(100vh);
     padding-left: 0;
     flex-direction: column-reverse;
   }
@@ -99,7 +99,7 @@
     display: block;
     border: 3px solid aquamarine;
     border-radius: 10px;
-    margin: 0;
+    margin: 40px 0 0 0;
     position: relative;
     top: 0;
     left: 0;
