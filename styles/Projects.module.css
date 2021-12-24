@@ -1,11 +1,28 @@
 .projects {
   display: block;
+  background-color: #fff;
+  padding: 2rem 1rem;
+}
+
+.projects h2 {
+  color: #1b4f72;
+  text-align: left;
+  margin-left: 12rem;
+  margin-bottom: 3rem;
+}
+
+.projects h2 span {
+  text-decoration-line: underline;
+  text-underline-offset: 0.4rem;
+  text-decoration-thickness: 0.3rem;
+  text-decoration-color: rgb(3, 159, 190);
 }
 
 .projectsList {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .listItem {
@@ -13,24 +30,50 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 33.333%;
+  width: 30%;
   text-align: center;
+  background-color: rgb(241, 240, 240);
+  padding: 1rem;
+  margin: 0.5rem;
+  border: 1px solid rgb(226, 224, 224);
+  border-radius: 0.3rem;
 }
 
-.listItem a, .listItem a span {
-    width: 100%;
+.listItem:hover {
+  transform: scale(1.03);
+  transition: 600ms;
+}
+
+.listItem a,
+.listItem a span {
+  width: 100%;
+  z-index: 1;
 }
 
 .listItem a img {
-    display: block;
-    max-width: 100%;
+  display: block;
+  max-width: 100%;
+  border: 5px solid #fff !important;
+}
+
+.listItem h5 {
+  color: rgb(3, 159, 190);
+  margin: 0.5rem auto;
+  text-align: center;
+  text-decoration: underline;
 }
 
 .toolsBtn {
-display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .toolsBtn button {
-margin: 1rem .5rem .5rem .5rem;
+  margin: 0.5rem;
+  background-color: rgb(208, 211, 216);
+  border: 0.2px solid rgb(199, 198, 198);
+  color: rgb(69, 109, 119);
+  border-radius: 0.8rem;
+  font-size: 0.7rem;
+  padding: 0.2rem 0.3rem;
 }
