@@ -32,7 +32,7 @@ export default function elysiumgroupltd() {
 
                     <div className={projectStyles.techNvisit}>
 
-                    <p>Notable Technologies: <span>React.js, Redux, Node.js, Express.js, MongoDB, Reactstrap, Bootstrap, More ...</span></p>
+                        <p>Notable Technologies: <span>React.js, Redux, Reactstrap, Bootstrap, Node.js, Express.js, MongoDB, More ...</span></p>
                     <Link href="https://www.elysiumgroupltd.com/">
                         <a>Visit Elysium Group Ltd</a>
                     </Link>

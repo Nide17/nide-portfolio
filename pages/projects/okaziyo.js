@@ -22,9 +22,9 @@ export default function okaziyo() {
 
                     <h2>D<span>escription</span></h2>
 
-                    <p>This web application was made Elysium Group, a company that has been established in November 2019 to provide Consultancy services in Architectural and Engineering activities and related technical consultancy, Consultancy in Project Management and Estate Construction, Consultancy in the field of construction, Control and supervision of works and real estate appraisals Research and experimental development on natural sciences and engineering, Technical testing and analysis, Specialized design activities, ICT Consultancy, Business development and management consultancy, accounting, Auditing, book-keeping Consultancy and other scientific research.</p>
+                    <p>Okaziyo is a web application that helps people to buy, sell or rent anything. It gives people good time to search, plan and decide what to buy, sell or rent. It also gives information about jobs and scholarships and tenders and more. Okaziyo is a part of Elysium Group Ltd.</p>
 
-                    <p>This web application helps this company for online presense and displays their services, projects, team and various contact ways.</p>
+                    <p>This web application helps people to view and take actions against jobs, scholarships, products to be sold. On this app, the administrator can post jobs, scholarships, products and more via the dashboard once he is logged in. Users can also contact the admin via the contact form and the admin recieves the message as the email</p>
                 </div>
 
                 <div className={projectStyles.pImages}>
@@ -32,7 +32,7 @@ export default function okaziyo() {
 
                     <div className={projectStyles.techNvisit}>
 
-                        <p>Notable Technologies: <span>React.js, Redux, Node.js, Express.js, MongoDB, Reactstrap, Bootstrap, More ...</span></p>
+                        <p>Notable Technologies: <span>React.js, Redux, Reactstrap, Bootstrap, Node.js, Express.js, MongoDB, AWS, More ...</span></p>
                         <Link href="https://www.okaziyo.com/">
                             <a>Visit Okaziyo</a>
                         </Link>
