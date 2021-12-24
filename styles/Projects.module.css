@@ -47,7 +47,6 @@
 .listItem a,
 .listItem a span {
   width: 100%;
-  z-index: 1;
 }
 
 .listItem a img {

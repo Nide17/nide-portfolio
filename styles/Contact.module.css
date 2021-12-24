@@ -79,6 +79,11 @@
   padding: 0.3rem !important;
 }
 
+.reachMeImg img:hover {
+  transform: rotate(360deg);
+  transition: 1000ms;
+}
+
 span.imgSpan {
   width: 100%;
   display: flex;

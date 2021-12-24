@@ -81,6 +81,11 @@
   padding: 0.2rem !important;
 }
 
+.socialIcons img:hover {
+  transform: rotate(360deg);
+  transition: 1000ms;
+}
+
 .copyright {
   font-size: 0.9rem;
   line-height: 1.5;
