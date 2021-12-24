@@ -22,9 +22,9 @@ export default function hortiprice() {
 
                     <h2>D<span>escription</span></h2>
 
-                    <p>This web application was made Elysium Group, a company that has been established in November 2019 to provide Consultancy services in Architectural and Engineering activities and related technical consultancy, Consultancy in Project Management and Estate Construction, Consultancy in the field of construction, Control and supervision of works and real estate appraisals Research and experimental development on natural sciences and engineering, Technical testing and analysis, Specialized design activities, ICT Consultancy, Business development and management consultancy, accounting, Auditing, book-keeping Consultancy and other scientific research.</p>
+                    <p>Quiz Blog is a web application that provides a multi-category space for people to quiz from. It gives people good time to fix what they studied and even prepare for exams.</p>
 
-                    <p>This web application helps this company for online presense and displays their services, projects, team and various contact ways.</p>
+                    <p>This web application helps learners to view, attempt quizzes and review their answers. It contains also notes and past papers for various exams. On this app the user can attempt any quiz but answers and reviews are saved once he or she is logged in. He can also download notes and past papers when he is logged too.</p>
                 </div>
 
                 <div className={projectStyles.pImages}>
