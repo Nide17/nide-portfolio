@@ -3,6 +3,7 @@ import welcomeStyles from '../styles/Welcome.module.css'
 
 export default function Welcome() {
     return (
+        
         <div className={welcomeStyles.welcome} id="home">
 
             <div className={welcomeStyles.myimage}>

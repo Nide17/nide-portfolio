@@ -2,6 +2,12 @@ import Image from 'next/image'
 import contactStyles from '../styles/Contact.module.css'
 
 export default function Contact() {
+
+    const onSubmitHandler = (e) => {
+        e.preventDefault();
+        console.log('Message sent!');
+    }
+
     return (
         <div className={contactStyles.contact} id="contact">
 
@@ -37,10 +43,11 @@ export default function Contact() {
             <div className={contactStyles.contactForm}>
                 <form>
                     <div className="inputRow">
-                        <input type="text" className="name" placeholder='Your Name ...'/>
-                        <input type="email" className="email" placeholder='Your Email ...'/>
+                        <input type="text" className="name" placeholder='Your Name ...' />
+                        <input type="email" className="email" placeholder='Your Email ...' />
                         <textarea name="message" id="" cols="30" rows="6" className="message" placeholder='Your Message ...'></textarea>
-                        <button className="send-message">Send Message</button>
+
+                        <button className="send-message" onClick={onSubmitHandler}>Send Message</button>
                     </div>
                 </form>
             </div>
