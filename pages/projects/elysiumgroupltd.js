@@ -33,9 +33,22 @@ export default function elysiumgroupltd() {
                     <div className={projectStyles.techNvisit}>
 
                         <p>Notable Technologies: <span>React.js, Redux, Reactstrap, Bootstrap, Node.js, Express.js, MongoDB, More ...</span></p>
-                    <Link href="https://www.elysiumgroupltd.com/">
-                        <a>Visit Elysium Group Ltd</a>
-                    </Link>
+
+                        <div className={projectStyles.visitProject}>
+                        <Link href="https://github.com/Nide17/elysiumgroup-client"><a>
+                            <Image src="/images/github1.png" alt='GitHub Repo' width={24} height={24} />
+                        </a></Link>
+
+                        <Link href="https://github.com/Nide17/elysiumgroup-server"><a>
+                            <Image src="/images/github1.png" alt='GitHub Repo' width={24} height={24} />
+                        </a></Link>
+
+                        <Link href="https://www.elysiumgroupltd.com/"><a>
+                            <Image src="/images/website.png" alt='Website' width={24} height={24} />
+                        </a></Link>
+
+                        </div>
+
                     </div>
                 </div>
 

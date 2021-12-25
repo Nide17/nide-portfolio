@@ -33,9 +33,19 @@ export default function quizblog() {
                     <div className={projectStyles.techNvisit}>
 
                         <p>Notable Technologies: <span>React.js, Redux, Reactstrap, Bootstrap, Node.js, Express.js, MongoDB, AWS, More ...</span></p>
-                        <Link href="http://quizblog.rw/">
-                            <a>Visit Quiz Blog Rwanda</a>
-                        </Link>
+                        
+                        <div className={projectStyles.visitProject}>
+
+                            <Link href="https://github.com/Nide17/quiz-blog-rw"><a>
+                                <Image src="/images/github1.png" alt='GitHub Repo' width={24} height={24} />
+                            </a></Link>
+
+                            <Link href="http://quizblog.rw/"><a>
+                                <Image src="/images/website.png" alt='Website' width={24} height={24} />
+                            </a></Link>
+
+                        </div>
+
                     </div>
                 </div>
 

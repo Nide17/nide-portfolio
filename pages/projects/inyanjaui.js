@@ -31,9 +31,19 @@ export default function inyanjaui() {
                     <div className={projectStyles.techNvisit}>
 
                         <p>Notable Technologies: <span>React.js, Redux, Bootstrap, More ...</span></p>
-                        <Link href="http://inyanjaui.herokuapp.com/">
-                            <a>Visit Inyanja Web Space UI</a>
-                        </Link>
+                        
+                        <div className={projectStyles.visitProject}>
+
+                            <Link href="https://github.com/inyanja/inyanja-learning-ui"><a>
+                                <Image src="/images/github1.png" alt='GitHub Repo' width={24} height={24} />
+                            </a></Link>
+
+                            <Link href="inyanjaui.herokuapp.com/"><a>
+                                <Image src="/images/website.png" alt='Website' width={24} height={24} />
+                            </a></Link>
+
+                        </div>
+
                     </div>
                 </div>
 

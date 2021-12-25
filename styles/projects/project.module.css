@@ -128,6 +128,27 @@
   color: #0d2331;
 }
 
+.visitProject {
+  display: flex;
+}
+
+.visitProject span {
+  padding: .2rem;
+  border: 2px solid rgb(3, 159, 190) !important;
+  border-radius: 0.3rem;
+}
+
+.visitProject img {
+  display: block;
+  max-width: 100%;
+  background-color: #fff;
+}
+
+.visitProject img:hover {
+  transform: translateY(-1px);
+  transition: 600ms;
+}
+
 @media screen and (max-width: 600px) {
   .projectHeader {
     height: calc(100vh - 17rem);

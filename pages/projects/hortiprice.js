@@ -33,9 +33,19 @@ export default function hortiprice() {
                     <div className={projectStyles.techNvisit}>
 
                         <p>Notable Technologies: <span>Python, Flask, PostgreSQL, Jinja2, HTML, CSS, Bootstrap, More ...</span></p>
-                        <Link href="http://hortiprice.herokuapp.com/">
-                            <a>Visit Hortiprice</a>
-                        </Link>
+                        
+                        <div className={projectStyles.visitProject}>
+
+                            <Link href="https://github.com/Nide17/hortiprice"><a>
+                                <Image src="/images/github1.png" alt='GitHub Repo' width={24} height={24} />
+                            </a></Link>
+
+                            <Link href="http://hortiprice.herokuapp.com/"><a>
+                                <Image src="/images/website.png" alt='Website' width={24} height={24} />
+                            </a></Link>
+
+                        </div>
+
                     </div>
                 </div>
 

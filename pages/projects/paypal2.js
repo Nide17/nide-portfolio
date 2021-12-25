@@ -33,9 +33,17 @@ export default function paypal2() {
                     <div className={projectStyles.techNvisit}>
 
                         <p>Notable Technologies: <span>React.js, HTML, CSS, Bootstrap, More ...</span></p>
-                        <Link href="http://paypal2.herokuapp.com/">
-                            <a>Visit Paypal2</a>
-                        </Link>
+                        
+                        <div className={projectStyles.visitProject}>
+                            <Link href="https://github.com/Nide17/paypal2"><a>
+                                <Image src="/images/github1.png" alt='GitHub Repo' width={24} height={24} />
+                            </a></Link>
+
+                            <Link href="http://paypal2.herokuapp.com/"><a>
+                                <Image src="/images/website.png" alt='Website' width={24} height={24} />
+                            </a></Link>
+
+                        </div>
                     </div>
                 </div>
 
