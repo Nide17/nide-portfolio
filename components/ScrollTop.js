@@ -1,4 +1,4 @@
-import ScrollTopView from '../pages/_scrollView'
+import ScrollTopView from './_scrollView'
 import { createElement, useState } from 'react'
 
 const ScrollTop = () => {
