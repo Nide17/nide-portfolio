@@ -13,10 +13,10 @@ export default function Navbar() {
             </Link>
 
             <ul className={navbarStyles.links}>
-                <li><Link href="#home"><a>H<span>ome</span></a></Link></li>
-                <li><Link href="#about"><a>A<span>bout</span></a></Link></li>
-                <li><Link href="#projects"><a>P<span>rojects</span></a></Link></li>
-                <li><Link href="#contact"><a>C<span>ontact</span></a></Link></li>
+                <li><Link href="/#home"><a>H<span>ome</span></a></Link></li>
+                <li><Link href="/#about"><a>A<span>bout</span></a></Link></li>
+                <li><Link href="/#projects"><a>P<span>rojects</span></a></Link></li>
+                <li><Link href="/#contact"><a>C<span>ontact</span></a></Link></li>
             </ul>
         </nav>
     )

@@ -2,6 +2,8 @@
 
 # dependencies
 /node_modules
+/pages/contacts
+/styles/contacts
 /.pnp
 .pnp.js
 
