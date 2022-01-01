@@ -58,7 +58,7 @@ export default function Footer() {
                 </div>
 
                 <div className={footerStyles.copyright}>
-                    &copy; Niyomwungeri Parmenide Ishimwe 2021 - All Rights Reserved
+                    &copy; Niyomwungeri Parmenide Ishimwe 2022 - All Rights Reserved
                 </div>
 
             </div>

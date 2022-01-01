@@ -4,6 +4,8 @@
 /node_modules
 /pages/contacts
 /styles/contacts
+/pages/api/contacts
+/components/ContactItem.js
 /.pnp
 .pnp.js
 
