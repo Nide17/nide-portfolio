@@ -5,12 +5,10 @@
 .projectHeader {
   height: calc(100vh - 10rem);
   background: rgb(2, 0, 36);
-  background: radial-gradient(
-    circle,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(27, 79, 114, 1) 0%,
-    rgba(0, 212, 255, 1) 100%
-  );
+  background: radial-gradient(circle,
+      rgba(2, 0, 36, 1) 0%,
+      rgba(27, 79, 114, 1) 0%,
+      rgba(0, 212, 255, 1) 100%);
   display: flex;
   flex-direction: column;
   align-items: center;

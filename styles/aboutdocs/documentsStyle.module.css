@@ -1,0 +1,85 @@
+.docDetails {
+    margin: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 2rem 5rem;
+    background: rgb(2, 0, 36);
+    background: radial-gradient(circle,
+            rgba(2, 0, 36, 1) 0%,
+            rgba(27, 79, 114, 1) 0%,
+            rgba(0, 212, 255, 1) 100%);
+    color: #fff;
+}
+
+.titleToggler {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.titleToggler h3 {
+    color: rgb(255, 255, 255);
+    margin-bottom: 1.4rem;
+    text-decoration: underline;
+    font-weight: 900;
+}
+
+.titleToggler button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: .5px solid #1b4f72;
+    border-radius: 50%;
+    width: 1.7rem;
+}
+
+.titleToggler button span {
+    border: none;
+    color: #1b4f72;
+    font-weight: 900;
+    font-size: 1rem;
+}
+
+
+.docsList {
+    display: block;
+}
+
+.docsList li {
+    display: block;
+    list-style: none;
+}
+
+.docsList h6 {
+    color: #ffffff;
+    margin: 1.4rem auto;
+    font-size: .7rem;
+    font-weight: 900;
+}
+
+.docsList small {
+    margin-bottom: 1.4rem !important;
+    font-size: .8rem;
+}
+
+.docsLinks {
+    padding: 1.3rem 0;
+    margin-bottom: 2rem;
+}
+
+.docsLinks button {
+    margin: 0 1rem;
+    background-color: rgb(208, 211, 216);
+    border: 0.2px solid rgb(199, 198, 198);
+    color: rgb(69, 109, 119);
+    border-radius: 0.4rem;
+    font-size: 0.7rem;
+    padding: .4rem .7rem;
+    padding: 0.5rem;
+    background-color: rgba(0, 212, 255, 1);
+    color: rgb(255, 255, 255);
+    border: 1px solid rgba(0, 212, 255, 1);
+    border-radius: 0.3rem;
+}

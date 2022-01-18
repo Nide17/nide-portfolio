@@ -1,0 +1,27 @@
+.tabs h2 {
+    text-align: center;
+}
+
+.tabs h2 {
+    color: #1b4f72;
+    text-align: center;
+    margin-left: 0;
+    margin-bottom: 2rem;
+}
+
+.tabs h2 span {
+    text-decoration-line: underline;
+    text-underline-offset: 0.4rem;
+    text-decoration-thickness: 0.3rem;
+    text-decoration-color: rgb(3, 159, 190);
+}
+
+.tabs ul:first-child {
+    border-bottom: 2px solid aquamarine !important;
+    border-left: 2px solid aquamarine !important;
+    border-right: 2px solid aquamarine !important;
+}
+
+.tabs li {
+ color: aquamarine;
+}
