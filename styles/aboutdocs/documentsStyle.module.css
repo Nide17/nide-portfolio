@@ -1,26 +1,21 @@
 .docDetails {
     margin: 0 !important;
+    background-color: rgb(241, 240, 240);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     padding: 2rem 5rem;
-    background: rgb(2, 0, 36);
-    background: radial-gradient(circle,
-            rgba(2, 0, 36, 1) 0%,
-            rgba(27, 79, 114, 1) 0%,
-            rgba(0, 212, 255, 1) 100%);
-    color: #fff;
 }
 
 .titleToggler {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
 }
 
 .titleToggler h3 {
-    color: rgb(255, 255, 255);
+    color: rgb(3, 159, 190);
     margin-bottom: 1.4rem;
     text-decoration: underline;
     font-weight: 900;
@@ -35,7 +30,7 @@
     width: 1.7rem;
 }
 
-.titleToggler button span {
+.titleToggler button span{
     border: none;
     color: #1b4f72;
     font-weight: 900;
@@ -53,7 +48,7 @@
 }
 
 .docsList h6 {
-    color: #ffffff;
+    color: #1b4f72;
     margin: 1.4rem auto;
     font-size: .7rem;
     font-weight: 900;
@@ -71,15 +66,15 @@
 
 .docsLinks button {
     margin: 0 1rem;
-    background-color: rgb(208, 211, 216);
-    border: 0.2px solid rgb(199, 198, 198);
-    color: rgb(69, 109, 119);
-    border-radius: 0.4rem;
-    font-size: 0.7rem;
-    padding: .4rem .7rem;
-    padding: 0.5rem;
-    background-color: rgba(0, 212, 255, 1);
-    color: rgb(255, 255, 255);
-    border: 1px solid rgba(0, 212, 255, 1);
-    border-radius: 0.3rem;
+      background-color: rgb(208, 211, 216);
+      border: 0.2px solid rgb(199, 198, 198);
+      color: rgb(69, 109, 119);
+      border-radius: 0.4rem;
+      font-size: 0.7rem;
+      padding: .4rem .7rem;
+        padding: 0.5rem;
+        background-color: rgba(0, 212, 255, 1);
+        color: rgb(241, 240, 240);
+        border: 1px solid rgba(0, 212, 255, 1);
+        border-radius: 0.3rem;
 }
