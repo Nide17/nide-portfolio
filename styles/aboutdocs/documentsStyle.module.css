@@ -1,23 +1,42 @@
 .docDetails {
     margin: 0 !important;
-    background-color: rgb(241, 240, 240);
+    background-color: rgb(238, 238, 238);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 2rem 5rem;
+    padding: 2rem 17rem;
+}
+
+.docsList li {
+    display: block;
+    list-style: none;
+    margin: .6rem 0;
+    border: 1px solid rgb(3, 159, 190);
+    border-radius: .3rem;
+    background-color: rgb(3, 159, 190);
+}
+
+.docsList {
+    display: block;
 }
 
 .titleToggler {
-display: flex;
-justify-content: space-between;
-align-items: flex-start;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    padding: 1rem;
+    border: 2px solid rgb(3, 159, 190);
+    border-radius: .3rem;
 }
 
 .titleToggler h3 {
     color: rgb(3, 159, 190);
-    margin-bottom: 1.4rem;
+    margin-bottom: 1.1rem;
     text-decoration: underline;
+    text-transform: uppercase;
+    font-size: 1.1rem;
     font-weight: 900;
 }
 
@@ -25,38 +44,31 @@ align-items: flex-start;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: .5px solid #1b4f72;
-    border-radius: 50%;
-    width: 1.7rem;
-}
-
-.titleToggler button span{
+    vertical-align: middle;
     border: none;
-    color: #1b4f72;
-    font-weight: 900;
-    font-size: 1rem;
+    background: white;
 }
 
-
-.docsList {
-    display: block;
+.collapseContent {
+    padding: 1rem 2rem;
+    color: #fff;
 }
 
-.docsList li {
-    display: block;
-    list-style: none;
-}
-
-.docsList h6 {
-    color: #1b4f72;
-    margin: 1.4rem auto;
+.collapseContent h6 {
+    color: #dceaf7;
+    margin: 1.1rem auto;
     font-size: .7rem;
     font-weight: 900;
 }
 
-.docsList small {
-    margin-bottom: 1.4rem !important;
-    font-size: .8rem;
+.collapseContent p {
+    font-size: 1rem;
+}
+
+.collapseContent small {
+    margin-bottom: 1.1rem !important;
+    font-size: .7rem;
+    text-decoration: underline;
 }
 
 .docsLinks {
@@ -65,16 +77,61 @@ align-items: flex-start;
 }
 
 .docsLinks button {
-    margin: 0 1rem;
-      background-color: rgb(208, 211, 216);
-      border: 0.2px solid rgb(199, 198, 198);
-      color: rgb(69, 109, 119);
-      border-radius: 0.4rem;
-      font-size: 0.7rem;
-      padding: .4rem .7rem;
-        padding: 0.5rem;
-        background-color: rgba(0, 212, 255, 1);
-        color: rgb(241, 240, 240);
-        border: 1px solid rgba(0, 212, 255, 1);
-        border-radius: 0.3rem;
+    margin: 0 .5rem;
+    padding: .4rem .7rem;
+    border: 1px solid rgba(0, 212, 255, 1);
+    border-radius: 0.3rem;
+    font-size: 0.7rem;
+    background-color: rgba(0, 212, 255, 1);
+    color: rgb(255, 255, 255);
+}
+
+@media screen and (max-width: 1024px) {
+    .docDetails {
+        height: fit-content;
+        padding: .5rem;
+    }
+
+    ul.docsList {
+        padding: 0 .7rem;
+    }
+
+    .docsList li {
+        margin: 1rem 0;
+        border: .8px solid rgb(3, 159, 190);
+    }
+
+    .titleToggler {
+        padding: .8rem;
+        border: 1.2px solid rgb(3, 159, 190);
+    }
+
+    .titleToggler h3 {
+        margin-bottom: 1.2rem;
+        font-size: .8rem;
+    }
+
+    .collapseContent {
+        padding: .8rem .5rem;
+    }
+
+    .collapseContent h6 {
+        margin: 1.1rem auto;
+        font-size: .65rem;
+    }
+
+    .collapseContent p {
+        font-size: .7rem;
+    }
+
+    .collapseContent small {
+        margin-bottom: 1.1rem !important;
+        font-size: .6rem;
+    }
+
+    .docsLinks {
+        padding: 0;
+        padding-top: 1.5rem;
+        margin-bottom: 0;
+    }
 }

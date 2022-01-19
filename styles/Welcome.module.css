@@ -142,7 +142,7 @@
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1024px) {
   .welcome {
     height: calc(100vh - 4rem);
   }

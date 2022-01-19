@@ -50,12 +50,28 @@
 .description blockquote {
     margin-top: 3rem;
     text-align: center;
-    color: #1b4f72;
+    color: #d4cfcf;
     font-weight: bolder;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1024px) {
+    .aboutdocs {
+        height: fit-content;
+        padding: .5rem;
+    }
+
     .myimage {
         height: 65%;
+    }
+
+    .description {
+        display: block;
+        margin: 0;
+        padding: 2rem 1rem;
+    }
+
+    .description p {
+        font-size: 0.8rem;
+        line-height: 1.2;
     }
 }

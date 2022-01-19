@@ -3,6 +3,7 @@ import { Collapse } from "react-collapse";
 import classNames from "classnames";
 import documentsStyle from '../../styles/aboutdocs/documentsStyle.module.css'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const DocsCollapse = (props) => {
 
@@ -18,13 +19,13 @@ const DocsCollapse = (props) => {
         if (state.activeIndex === index) {
             return (
                 <span>
-                    <i className="fas fa-angle-up" /> -
+                    <Image src="/images/minus.svg" alt='collapse' width={20} height={20} />
                 </span>
             );
         } else {
             return (
                 <span>
-                    <i className="fas fa-angle-down" /> +
+                    <Image src="/images/plus.svg" alt='expand' width={20} height={20} />
                 </span>
             );
         }
@@ -74,7 +75,7 @@ const DocsCollapse = (props) => {
                                 hide: activeIndex !== index
                             })}
                         >
-                            {/* {post.message} */}
+                            <div className={documentsStyle.collapseContent}>
                             <p>My detailed resume</p>
 
                             <h6><i>Dev CV</i></h6>
@@ -92,6 +93,7 @@ const DocsCollapse = (props) => {
                                         Verify
                                     </a></Link>
                                 </button>
+                            </div>
                             </div>
 
                         </div>

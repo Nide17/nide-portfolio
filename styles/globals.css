@@ -22,3 +22,11 @@ img {
   max-width: 100%;
   display: block;
 }
+
+ul li.react-tabs__tab--selected {
+  background-color: rgb(3, 159, 190) !important;
+  color: #fff;
+  border-top: 2px solid #fff !important;
+  border-left: 2px solid #fff !important;
+  border-right: 2px solid #fff !important;
+}

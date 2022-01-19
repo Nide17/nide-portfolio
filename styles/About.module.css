@@ -63,7 +63,7 @@
     box-shadow: 0 0 0 -3px rgb(170, 170, 170), 0 0 0 0 rgba(0, 212, 255, 1), 0 0 0 -3px rgb(170, 170, 170), 0 0 0 0 rgb(3, 159, 190), 0 0 0 -3px rgb(170, 170, 170), 0 0 0 0 #1b4f72, 0 0 0 -3px rgb(170, 170, 170), 0 0 0 0 rgba(2, 0, 36, 1);
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1024px) {
     .about {
         height: calc(100vh);
         padding-left: 0;

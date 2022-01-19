@@ -149,7 +149,7 @@ span.imgSpan {
   border-radius: 0.3rem;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1024px) {
   .contact {
     height: fit-content;
     padding: 0 0.5rem;

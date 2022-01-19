@@ -77,7 +77,7 @@
   padding: 0.2rem 0.3rem;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1024px) {
   .projects {
     padding: 1rem 0.5rem;
   }
