@@ -1,9 +1,11 @@
 import Meta from '../components/Meta'
 import Image from 'next/image'
 import aboutdocsStyles from '../styles/aboutdocs/aboutdocs.module.css'
-import Documents from '../components/aboutDocs/Documents'
+import CategoryTabs from '../components/aboutDocs/CategoryTabs'
 
-export default function aboutdocs() {
+import { server } from '../config'
+
+export default function aboutdocs({ aboutdocs }) {
 
     return (
         <div className={aboutdocsStyles.aboutdocs}>
@@ -35,6 +37,19 @@ export default function aboutdocs() {
                     <blockquote>Hope to work with you for your next project!</blockquote>
                 </p>
             </div>
-                <Documents />
+            <CategoryTabs aboutdocs={aboutdocs} />
         </div>)
 };
+
+// Fetch data
+export const getStaticProps = async () => {
+    const res = await fetch(`${server}/aboutdocs`)
+
+    const aboutdocs = await res.json()
+
+    return {
+        props: {
+            aboutdocs
+        }
+    }
+}

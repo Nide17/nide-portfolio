@@ -1,3 +1,13 @@
+.docDetails {
+    margin: 0 !important;
+    background-color: rgb(238, 238, 238);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 2rem 17rem;
+}
+
 .tabs h2 {
     text-align: center;
 }
@@ -26,6 +36,10 @@
 
 
 @media screen and (max-width: 1024px) {
+    .docDetails {
+        height: fit-content;
+        padding: .5rem;
+    }
 
     .tabs h2 {
         margin-bottom: 1.5rem;

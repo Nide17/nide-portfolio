@@ -1,13 +1,3 @@
-.docDetails {
-    margin: 0 !important;
-    background-color: rgb(238, 238, 238);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 2rem 17rem;
-}
-
 .docsList li {
     display: block;
     list-style: none;
@@ -50,7 +40,7 @@
 }
 
 .collapseContent {
-    padding: 1rem 2rem;
+    padding: 1rem 5rem 0 5rem;
     color: #fff;
 }
 
@@ -72,8 +62,10 @@
 }
 
 .docsLinks {
-    padding: 1.3rem 0;
-    margin-bottom: 2rem;
+    padding: 2rem 0 .8rem 0;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: center;
 }
 
 .docsLinks button {
@@ -87,11 +79,6 @@
 }
 
 @media screen and (max-width: 1024px) {
-    .docDetails {
-        height: fit-content;
-        padding: .5rem;
-    }
-
     ul.docsList {
         padding: 0 .7rem;
     }
