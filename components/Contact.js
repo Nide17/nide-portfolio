@@ -43,9 +43,9 @@ export default function Contact() {
             <div className={contactStyles.contactForm}>
                 <form>
                     <div className="inputRow">
-                        <input type="text" className="name" placeholder='Your Name ...' />
-                        <input type="email" className="email" placeholder='Your Email ...' />
-                        <textarea name="message" id="" cols="30" rows="6" className="message" placeholder='Your Message ...'></textarea>
+                        <input type="text" className="name" placeholder='Your Name ...' required />
+                        <input type="email" className="email" placeholder='Your Email ...' required />
+                        <textarea name="message" id="" cols="30" rows="6" className="message" placeholder='Your Message ...' required></textarea>
 
                         <button className="send-message" onClick={onSubmitHandler}>Send Message</button>
                     </div>
