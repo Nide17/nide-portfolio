@@ -14,7 +14,7 @@ export default function Meta({ keywords, description, title, favicon }) {
 
 Meta.defaultProps = {
     keywords: 'Niyomwungeri, Ishimwe, Parmenide, Kigali, Software Developer, Elysium Group Ltd',
-    description: 'Niyomwungeri Parmenide Ishimwe portfolio',
-    title: 'My Portfolio',
+    description: 'Niyomwungeri Parmenide Ishimwe portfolio done with next.js and node, express and postgres',
+    title: 'Niyomwungeri Parmenide Ishimwe portfolio Portfolio',
     favicon: '/favicon.ico'
 }
