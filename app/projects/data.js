@@ -50,9 +50,9 @@ const projects = [
         description: 'A mobile app for road and traffic code lessons, questions and answers',
         image: '/images/tegura.JPG',
         tools: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Bootstrap'],
-        link: 'https://github.com/Nide17/tegura',
+        link: null,
         githubFrontEnd: 'https://github.com/Nide17/tegura',
-        githubBackEnd: 'https://github.com/Nide17/tegura'
+        githubBackEnd: null
     },
     {
         id: 6,
@@ -63,7 +63,7 @@ const projects = [
         tools: [' React.js', 'Redux', 'Reactstrap'],
         link: 'https://j-tech.vercel.app/',
         githubFrontEnd: 'https://github.com/Nide17/j-tech',
-        githubBackEnd: 'https://j-tech.vercel.app/'
+        githubBackEnd: null
     },
     {
         id: 7,
@@ -83,9 +83,9 @@ const projects = [
         description: 'A full-stack web application for horticulture business plans',
         image: '/images/hortiprice.JPG',
         tools: ['PHP', 'MySQL', 'Bootstrap', 'HTML', 'CSS'],
-        link: 'https://github.com/Nide17/hortiprice',
+        link: null,
         githubFrontEnd: 'https://github.com/Nide17/hortiprice',
-        githubBackEnd: 'https://github.com/Nide17/hortiprice'
+        githubBackEnd: null
     },
     {
         id: 9,
@@ -96,7 +96,7 @@ const projects = [
         tools: ['React.js', 'HTML', 'CSS', 'Bootstrap'],
         link: 'https://paypal2.netlify.app',
         githubFrontEnd: 'https://github.com/Nide17/paypal2',
-        githubBackEnd: 'https://paypal2.netlify.app'
+        githubBackEnd: null
     },
     {
         id: 10,
@@ -107,7 +107,7 @@ const projects = [
         tools: ['HTML', 'CSS', 'JavaScript', 'D3.js', 'CSV'],
         link: 'https://nide17.github.io/reg_org_chart/',
         githubFrontEnd: 'https://github.com/Nide17/reg_org_chart',
-        githubBackEnd: 'https://github.com/Nide17/reg_org_chart'
+        githubBackEnd: null
     },
     {
         id: 11,
@@ -116,9 +116,9 @@ const projects = [
         description: 'A usable Linux shell that can execute commands such as "pwd, author, exit, quit, and cd", written in C.',
         image: '/images/plaidsh.JPG',
         tools: ['C', 'Bash', 'Linux', 'Makefile', 'Git', 'GitHub'],
-        link: 'https://github.com/Nide17/plaidsh-final',
+        link: null,
         githubFrontEnd: 'https://github.com/Nide17/plaidsh-final',
-        githubBackEnd: 'https://github.com/Nide17/plaidsh-final'
+        githubBackEnd: null
     },
     {
         id: 12,
@@ -127,7 +127,7 @@ const projects = [
         description: 'This is a link to my GitHub account',
         image: '/images/mygithub.PNG',
         tools: ['Git', 'GitHub'],
-        link: 'https://github.com/Nide17',
+        link: null,
         githubFrontEnd: 'https://github.com/Nide17',
         githubBackEnd: 'https://github.com/Nide17'
     }

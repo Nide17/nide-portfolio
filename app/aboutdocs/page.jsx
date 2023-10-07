@@ -10,11 +10,10 @@ export default function AboutDocs() {
     const [aboutdocs, setAboutDocs] = useState([])
 
     useEffect(() => {
-        const res = fetch(`${server}/aboutdocs`)
-        console.log(res)
-        // const aboutdocs = res.json()
-
-        // setAboutDocs(aboutdocs)
+        fetch(`${server}/aboutDocs`)
+            .then(res => res.json())
+            .then(data => setAboutDocs(data.aboutDocs))
+            .catch(err => console.log(err))
     }, [])
 
     return (
