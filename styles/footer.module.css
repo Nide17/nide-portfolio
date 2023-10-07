@@ -68,7 +68,7 @@
   margin-left: 5rem;
 }
 
-.socialIcons span {
+.socialIcons a {
   width: 32px;
   height: 32px;
   margin: 0.2rem !important;

@@ -1,19 +1,15 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import Meta from '../../components/Meta'
-import projectStyles from '../../styles/projects/project.module.css'
+import projectStyles from '../../../styles/projects/project.module.css'
 
 export default function okaziyo() {
 
     return (
         <div className={projectStyles.viewProject}>
-
-            <Meta title='Projects - Okaziyo' favicon='../../public/favicon.ico' />
-
             <div className={projectStyles.projectHeader}>
 
                 <h1>Okaziyo</h1>
-                <p><Link href="/"><a>Back to home</a></Link></p>
+                <p><Link href="/">Back to home</Link></p>
             </div>
 
             <div className={projectStyles.projectContent}>
@@ -35,17 +31,17 @@ export default function okaziyo() {
                         <p>Notable Technologies: <span>React.js, Redux, Reactstrap, Bootstrap, Node.js, Express.js, MongoDB, AWS, More ...</span></p>
 
                         <div className={projectStyles.visitProject}>
-                            <Link href="https://github.com/Nide17/okaziyo-client"><a>
+                            <Link href="https://github.com/Nide17/okaziyo-client">
                                 <Image src="/images/github1.png" alt='GitHub Repo' width={24} height={24} />
-                            </a></Link>
+                            </Link>
 
-                            <Link href="https://github.com/Nide17/okaziyo-server"><a>
+                            <Link href="https://github.com/Nide17/okaziyo-server">
                                 <Image src="/images/github1.png" alt='GitHub Repo' width={24} height={24} />
-                            </a></Link>
+                            </Link>
 
-                            <Link href="https://www.okaziyo.com/"><a>
+                            <Link href="https://www.okaziyo.com/">
                                 <Image src="/images/website.png" alt='Website' width={24} height={24} />
-                            </a></Link>
+                            </Link>
 
                         </div>
 

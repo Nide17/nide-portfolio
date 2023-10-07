@@ -5,7 +5,7 @@
 /pages/contacts
 /styles/contacts
 /pages/api/contacts
-/components/ContactItem.js
+/utils/ContactItem.js
 /.pnp
 .pnp.js
 

@@ -1,12 +1,12 @@
-module.exports = {
-  reactStrictMode: true,
-
-  webpackDevMiddleware: config => {
-    config.watchOptions = {
-      poll: 1000,
-      aggregateTimeout: 300,
-    }
-
-    return config
+const nextConfig = {
+  experimental: {
+    appDir: true,
+    images: {
+      allowFutureImage: true
+    },
+    future: {
+      webpack5: true,
+    },
+    optimizeFonts: false, // disables Automatic Webpack 5 Font Optimization
   },
-}
+};

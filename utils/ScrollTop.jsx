@@ -1,3 +1,5 @@
+"use client"
+
 import ScrollTopView from './_scrollView'
 import { createElement, useState } from 'react'
 

@@ -1,19 +1,15 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import Meta from '../../components/Meta'
-import projectStyles from '../../styles/projects/project.module.css'
+import projectStyles from '../../../styles/projects/project.module.css'
 
 export default function quizblog() {
 
     return (
         <div className={projectStyles.viewProject}>
-
-            <Meta title='Projects - Quiz Blog Rwanda' favicon='../../public/favicon.ico' />
-
             <div className={projectStyles.projectHeader}>
 
                 <h1>Quiz Blog Rwanda</h1>
-                <p><Link href="/"><a>Back to home</a></Link></p>
+                <p><Link href="/">Back to home</Link></p>
             </div>
 
             <div className={projectStyles.projectContent}>
@@ -36,13 +32,13 @@ export default function quizblog() {
                         
                         <div className={projectStyles.visitProject}>
 
-                            <Link href="https://github.com/Nide17/quiz-blog-rw"><a>
+                            <Link href="https://github.com/Nide17/quiz-blog-rw">
                                 <Image src="/images/github1.png" alt='GitHub Repo' width={24} height={24} />
-                            </a></Link>
+                            </Link>
 
-                            <Link href="http://quizblog.rw/"><a>
+                            <Link href="http://quizblog.rw/">
                                 <Image src="/images/website.png" alt='Website' width={24} height={24} />
-                            </a></Link>
+                            </Link>
 
                         </div>
 

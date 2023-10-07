@@ -53,6 +53,7 @@
   display: block;
   max-width: 100%;
   border: 5px solid #fff !important;
+  margin: auto;
 }
 
 .listItem h5 {

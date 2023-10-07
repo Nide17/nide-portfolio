@@ -1,19 +1,14 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import Meta from '../../components/Meta'
-import projectStyles from '../../styles/projects/project.module.css'
+import projectStyles from '../../../styles/projects/project.module.css'
 
 export default function paypal2() {
-
     return (
         <div className={projectStyles.viewProject}>
-
-            <Meta title='Projects - Paypal2' favicon='../../public/favicon.ico' />
-
             <div className={projectStyles.projectHeader}>
 
                 <h1>Paypal2</h1>
-                <p><Link href="/"><a>Back to home</a></Link></p>
+                <p><Link href="/">Back to home</Link></p>
             </div>
 
             <div className={projectStyles.projectContent}>
@@ -33,15 +28,15 @@ export default function paypal2() {
                     <div className={projectStyles.techNvisit}>
 
                         <p>Notable Technologies: <span>React.js, HTML, CSS, Bootstrap, More ...</span></p>
-                        
-                        <div className={projectStyles.visitProject}>
-                            <Link href="https://github.com/Nide17/paypal2"><a>
-                                <Image src="/images/github1.png" alt='GitHub Repo' width={24} height={24} />
-                            </a></Link>
 
-                            <Link href="http://paypal2.herokuapp.com/"><a>
+                        <div className={projectStyles.visitProject}>
+                            <Link href="https://github.com/Nide17/paypal2">
+                                <Image src="/images/github1.png" alt='GitHub Repo' width={24} height={24} />
+                            </Link>
+
+                            <Link href="http://paypal2.herokuapp.com/">
                                 <Image src="/images/website.png" alt='Website' width={24} height={24} />
-                            </a></Link>
+                            </Link>
 
                         </div>
                     </div>

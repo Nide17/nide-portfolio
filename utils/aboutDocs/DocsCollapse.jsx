@@ -65,13 +65,11 @@ const DocsCollapse = (props) => {
 
                                 <div className={documentsStyle.docsLinks}>
                                     {doc.awsLink &&
-                                        <button><Link href={doc.awsLink}><a>Download</a></Link></button>}
-
+                                        <button><Link href={doc.awsLink}>Download</Link></button>}
                                     {doc.credentialLink &&
-                                        <button><Link href={doc.credentialLink}><a>Verify</a></Link></button>}
+                                        <button><Link href={doc.credentialLink}>Verify</Link></button>}
                                 </div>
                             </div>
-
                         </div>
                     </Collapse>
                 </li>
