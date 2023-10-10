@@ -6,6 +6,19 @@
       rgba(27, 79, 114, 1) 0%,
       rgba(0, 212, 255, 1) 100%);
 }
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 10px aquamarine;
+  }
+
+  50% {
+    box-shadow: 0 0 40px aquamarine;
+  }
+
+  100% {
+    box-shadow: 0 0 10px aquamarine;
+  }
+}
 
 .myimage {
   display: flex;
@@ -17,9 +30,11 @@
 .myimage img {
   border-radius: 50%;
   border: 5px solid aquamarine !important;
+  animation: glow 2s infinite;
 }
 
 .myimage img:hover {
+  animation: none;
   border-radius: 50%;
   transform: scale(0.93, 0.93);
   transition: 600ms;
