@@ -11,17 +11,15 @@ export default function Footer() {
                 <div className={footerStyles.sitemapBorder}>
                     <h2>E<span>xplore</span></h2>
                     <ul>
-                        <li><Link href="#home">Home</Link></li>
-                        <li><Link href="#about">About</Link></li>
-                        <li><Link href="#projects">Projects</Link></li>
-                        <li><Link href="#contact">Contact</Link></li>
+                        <li><Link href="/#home">Home</Link></li>
+                        <li><Link href="/#about">About</Link></li>
+                        <li><Link href="/#projects">Projects</Link></li>
+                        <li><Link href="/#contact">Contact</Link></li>
                     </ul>
                 </div>
 
             </div>
-
             <hr />
-
             <div className={footerStyles.rightPart}>
                 <small>
                     <blockquote>~Hard Work pays off~</blockquote>

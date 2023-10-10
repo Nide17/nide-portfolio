@@ -24,7 +24,7 @@ img {
 }
 
 ul li.react-tabs__tab--selected {
-  background-color: rgb(3, 159, 190) !important;
+  background-color: aquamarine !important;
   color: #fff;
   border-top: 2px solid #fff !important;
   border-left: 2px solid #fff !important;

@@ -71,7 +71,7 @@
 .docsLinks button {
     margin: 0 .5rem;
     padding: .4rem .7rem;
-    border: 1px solid rgba(0, 212, 255, 1);
+    border: 2px solid aquamarine;
     border-radius: 0.3rem;
     font-size: 0.7rem;
     background-color: rgba(0, 212, 255, 1);

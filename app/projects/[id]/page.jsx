@@ -15,32 +15,23 @@ export default function Project() {
     return (
         <div className={projectStyles.viewProject}>
             <div className={projectStyles.projectHeader}>
-
                 <h1>{project.title}</h1>
+                <strong>{project.description}</strong>
                 <p><Link href="/">Back to home</Link></p>
             </div>
 
             <div className={projectStyles.projectContent}>
-
-                <div className={projectStyles.description}>
-
-                    <h2>D<span>escription</span></h2>
-
-                    <p>{project.description}</p>
-                </div>
-
                 <div className={projectStyles.pImages}>
+                    
                     <Image src={project.image} alt={project.title} width={400} height={194}></Image>
 
                     <div className={projectStyles.techNvisit}>
-
-                        {/* <p>Notable Technologies: <span>React.js, Redux, Reactstrap, Bootstrap, Node.js, Express.js, MongoDB, AWS, More ...</span></p> */}
                         <p>Notable Technologies: <span>
                             {
                                 project.tools.map((tool, index) => {
                                     return <span key={index}>{tool}, </span>
                                 })
-                            } More ...</span></p>
+                            } more ...</span></p>
 
                         <div className={projectStyles.visitProject}>
 

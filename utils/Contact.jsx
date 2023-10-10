@@ -2,6 +2,8 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import contactStyles from '../styles/Contact.module.css'
+import { server } from '../config'
+import ReactLoading from 'react-loading';
 
 export default function Contact() {
 
@@ -10,6 +12,9 @@ export default function Contact() {
         email: '',
         message: ''
     })
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(null)
+    const [success, setSuccess] = useState(null)
 
     const onChangeHandler = e => {
         const { name, value } = e.target
@@ -17,6 +22,7 @@ export default function Contact() {
     };
 
     const onSubmitHandler = (e) => {
+        setLoading(true)
         e.preventDefault();
 
         const { name, email, message } = state;
@@ -28,15 +34,22 @@ export default function Contact() {
             message
         };
 
-        fetch('https://nide-portfolio-server.herokuapp.com/contacts', {
+        fetch(`${server}/contacts`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(contactMsg),
         })
-
-        console.log(contactMsg);
+            .then(res => res.json())
+            .then(data => {
+                setSuccess(true)
+                setLoading(false)
+            })
+            .catch((error) => {
+                setError(true)
+                setLoading(false)
+            });
 
         // Reset fields
         setState({
@@ -48,24 +61,17 @@ export default function Contact() {
 
     return (
         <div className={contactStyles.contact} id="contact">
-
             <div className={contactStyles.contactDetails}>
-
                 <h2>C<span>ontact Me</span></h2>
-
                 <div className="contactText">
-
                     <p>
-                        &quot;Want to discuss about a project, collaborate or something else? Do not hesitate to contact me, I am always open to hear from you!&quot;</p>
+                        &quot;Interested in discussing a project, collaboration, or any other matter? Please don't hesitate to reach out—I'm always open and eager to hear from you!&quot;</p>
                 </div>
-
                 <div className={contactStyles.reachMe}>
-
                     <div className={contactStyles.reachMeImg}>
                         <Image src="/images/placeholder.png" alt='placeholder' width={30} height={30} />
                         <span className={contactStyles.imgSpan}>Kigali, Rwanda</span>
                     </div>
-
                     <div className={contactStyles.reachMeImg}>
                         <Image src="/images/gmail.png" alt='gmail' width={30} height={30} />
                         <span className={contactStyles.imgSpan}>nidedrogba@gmail.com</span>
@@ -75,22 +81,25 @@ export default function Contact() {
                         <span className={contactStyles.imgSpan}>+250788551997</span>
                     </div>
                 </div>
-
             </div>
 
             <div className={contactStyles.contactForm}>
+                {loading &&
+                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                        <ReactLoading type={"bars"} color={"aquamarine"} height={40} width={40} />
+                    </div>}
+
+                {error && <div style={{ textAlign: "center", color: "red" }}>Something went wrong! Please try again later.</div>}
+                {success && <div style={{ textAlign: "center", color: "green" }}>Message sent successfully!</div>}
 
                 <form onSubmit={onSubmitHandler}>
-
                     <div className="inputRow">
                         <input name="name" type="text" className="name" placeholder='Your Name ...' onChange={onChangeHandler} value={state.name || ""} required />
-
                         <input name="email" type="email" className="email" placeholder='Your Email ...' onChange={onChangeHandler} value={state.email || ""} required />
-
                         <textarea name="message" id="" cols="30" rows="6" className="message" placeholder='Your Message ...' onChange={onChangeHandler} value={state.message || ""} required></textarea>
-
-                        <button className="send-message">Send Message</button>
-                        {/* <button className="send-message" onClick={onSubmitHandler}>Send Message</button> */}
+                        <button className="send-message" disabled={loading}>
+                            Send Message
+                        </button>
                     </div>
                 </form>
             </div>

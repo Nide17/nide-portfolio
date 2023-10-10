@@ -37,7 +37,7 @@ const DocsCollapse = (props) => {
     if (props.loading) {
         content = "Loading...";
     } else {
-        content = props.documents.map((doc, index) => {
+        content = props && props.documents && props.documents.map((doc, index) => {
 
             return (
                 <li key={index}>

@@ -1,12 +1,10 @@
 .welcome {
   height: calc(100vh - 5rem);
   background: rgb(2, 0, 36);
-  background: radial-gradient(
-    circle,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(27, 79, 114, 1) 0%,
-    rgba(0, 212, 255, 1) 100%
-  );
+  background: radial-gradient(circle,
+      rgba(2, 0, 36, 1) 0%,
+      rgba(27, 79, 114, 1) 0%,
+      rgba(0, 212, 255, 1) 100%);
 }
 
 .myimage {
@@ -40,106 +38,15 @@
   color: rgb(255, 255, 255);
 }
 
-.dev,
-.des,
-.eng {
-  display: inline-block;
-}
-
-.iam {
-    font-size: 1.2rem;
-  text-align: center;
-  margin-right: 1rem;
-  color: #fff;
-}
-
-.typewriter {
-  text-align: left;
-  margin-top: 1%;
-  font-weight: bolder;
+.typeAnimation {
+  font-size: 2em;
   color: aquamarine;
-}
-
-.dev div,
-.des div,
-.eng div {
-  font-size: 1.2rem;
-  margin-bottom: 0.4rem;
-  padding-right: 0;
-  overflow: hidden;
-  border-right: 0.15em solid aquamarine;
-  white-space: nowrap;
-  width: 0;
-  text-decoration: underline;
-}
-
-.dev div {
-  animation: typing1 3s steps(25, end) forwards, blinking1 1.1s infinite;
-}
-
-.des div {
-  animation: typing2 3s steps(25, end) forwards, blinking2 1.1s infinite;
-  animation-delay: 3.5s;
-}
-.eng div {
-  animation: typing3 3s steps(25, end) forwards, blinking3 1.1s infinite;
-  animation-delay: 7s;
-}
-
-@keyframes typing1 {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
-
-@keyframes typing2 {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
-
-@keyframes typing3 {
-  from {
-    width: 0;
-    padding-right: 0;
-  }
-  to {
-    width: 100%;
-    padding-right: 0.2rem;
-  }
-}
-
-@keyframes blinking1 {
-  from {
-    border-color: transparent;
-  }
-  to {
-    border-color: transparent;
-  }
-}
-
-@keyframes blinking2 {
-  from {
-    border-color: transparent;
-  }
-  to {
-    border-color: transparent;
-  }
-}
-
-@keyframes blinking3 {
-  from {
-    border-color: transparent;
-  }
-  to {
-    border-color: aquamarine;
-  }
+  font-weight: bolder;
+  text-align: center;
+  margin-top: 3rem;
+  border: 1px solid aquamarine;
+  border-radius: 0.3rem;
+  padding: 0.5rem;
 }
 
 @media screen and (max-width: 1024px) {
@@ -152,29 +59,21 @@
   }
 
   .mytext {
-    padding-top: 0.3rem;
+    padding-top: 0.5rem;
   }
 
   .mytext p:first-child {
-    font-size: 0.8rem;
+    font-size: 1.5rem;
     line-height: 1.5;
     text-align: center;
     margin: 0.3rem auto;
   }
 
-  .iam {
-    font-size: 0.7rem;
-  }
-
-  .typewriter {
-    margin-top: 5%;
-    text-align: center;
-  }
-
-  .dev div,
-  .des div,
-  .eng div {
-    font-size: 0.7rem;
-    margin-bottom: 0;
+  .typeAnimation {
+    font-size: .9em;
+    margin: 1rem auto;
+    border: 1px solid aquamarine;
+    border-radius: 0.3rem;
+    padding: 0.5rem;
   }
 }

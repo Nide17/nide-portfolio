@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import projectsStyles from '../styles/Projects.module.css'
-import projects from '../app/projects/data.js'
+import projectsStyles from '../../styles/Projects.module.css'
+import projects from './data.js'
 
 export default function Projects() {
 

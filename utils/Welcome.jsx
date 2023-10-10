@@ -1,4 +1,6 @@
+"use client"
 import Image from 'next/image'
+import { TypeAnimation } from 'react-type-animation';
 import welcomeStyles from '../styles/Welcome.module.css'
 
 export default function Welcome() {
@@ -10,19 +12,19 @@ export default function Welcome() {
             </div>
             <div className={welcomeStyles.mytext}>
                 <p>Greetings, my name is Niyomwungeri Parmenide Ishimwe</p>
-                <p className={welcomeStyles.typewriter}>
-                    <div className={welcomeStyles.iam}>I am a</div>
-                    <br />
-                    <div className={welcomeStyles.dev}>
-                        <div className="developer">- Software Engineer</div></div>
-                    <br />
-                    <div className={welcomeStyles.des}>
-                        <div className="designer">- Data Analyst</div></div>
-                    <br />
-                    <div className={welcomeStyles.eng}>
-                        <div className="engineer">- IT Support Engineer</div></div>
-                    <br />
-                </p>
+                <TypeAnimation
+                    sequence={[
+                        "I'm a Software Engineer",
+                        1500,
+                        "I'm a Data Analyst",
+                        1500,
+                        "I'm an IT Support Engineer",
+                        1500,
+                    ]}
+                    speed={30}
+                    repeat={Infinity}
+                    className={welcomeStyles.typeAnimation}
+                />
             </div>
         </div>)
 }

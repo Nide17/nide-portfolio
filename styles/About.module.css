@@ -21,6 +21,7 @@
     text-underline-offset: 0.4rem;
     text-decoration-thickness: 0.3rem;
     text-decoration-color: rgb(3, 159, 190);
+    line-height: 3;
 }
 
 .bio p {
@@ -65,45 +66,53 @@
 
 @media screen and (max-width: 1024px) {
     .about {
-        height: calc(100vh);
+        height: 100%;
         padding-left: 0;
         flex-direction: column-reverse;
+        padding-bottom: 2rem;
     }
+
     .bio {
         width: 100%;
         padding: 0 1.3rem;
     }
+
     .bio h2 {
         margin-bottom: 2rem;
         text-align: center;
     }
+
     .bio h2 span {
         text-underline-offset: 0.2rem;
         text-decoration-thickness: 0.2rem;
     }
+
     .bio p {
         font-size: 0.9rem;
         line-height: 1.3;
     }
+
     .bio blockquote {
         font-size: 0.6rem;
     }
+
     .profilePic {
-        width: 180px;
         background-color: rgb(102, 102, 102);
         display: block;
         border: 3px solid aquamarine;
         border-radius: 10px;
-        margin: 40px 0 0 0;
+        margin: 100px 0 0 0;
         position: relative;
         top: 0;
         left: 0;
         cursor: pointer;
     }
+
     .profilePic img {
         min-height: 180px !important;
         min-width: 180px !important;
     }
+
     .profilePic:hover {
         top: -5%;
         left: 0%;

@@ -27,7 +27,7 @@ const projects = [
         slug: 'uacm',
         description: 'A full-stack web application for managing user accounts',
         image: '/images/uacm.jpg',
-        tools: ['Microservices', 'NextJS', 'Node.js', 'Express.js', 'Sequelize', 'PostgreSQL.js', 'AWS S3'],
+        tools: ['Microservices', 'NextJS', 'Node.js', 'Express.js', 'PostgreSQL.js', 'AWS S3'],
         link: 'https://irembo-user-acc-mgt.vercel.app/',
         githubFrontEnd: 'https://github.com/Nide17/irembo-user-acc-mgt/tree/main/next-user-acc-mgt',
         githubBackEnd: 'https://github.com/Nide17/irembo-user-acc-mgt'
@@ -49,7 +49,7 @@ const projects = [
         slug: 'tegura',
         description: 'A mobile app for road and traffic code lessons, questions and answers',
         image: '/images/tegura.jpg',
-        tools: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Bootstrap'],
+        tools: ['Figma', 'Dart', 'Flutter', 'Firebase', 'Firestore'],
         link: null,
         githubFrontEnd: 'https://github.com/Nide17/tegura',
         githubBackEnd: null

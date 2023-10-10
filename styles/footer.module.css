@@ -90,7 +90,9 @@
   font-size: 0.9rem;
   line-height: 1.5;
   font-weight: bolder;
-  margin: 1rem auto;
+  margin: 0 auto;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
   margin-left: 5rem;
   color: #164564;
 }
@@ -157,6 +159,8 @@
     text-align: center;
     font-size: 0.5rem;
     line-height: 1;
-    margin: 1rem auto;
+    margin: 0 auto;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
   }
 }
