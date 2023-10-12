@@ -128,7 +128,7 @@ const projects = [
         image: '/images/mygithub.png',
         tools: ['Git', 'GitHub'],
         link: null,
-        githubFrontEnd: 'https://github.com/Nide17',
+        githubFrontEnd: 'https://github.com/Nide17?tab=repositories',
         githubBackEnd: 'https://github.com/Nide17'
     }
 ];
