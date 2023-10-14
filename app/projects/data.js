@@ -67,6 +67,17 @@ const projects = [
     },
     {
         id: 7,
+        title: 'Auto Ecole',
+        slug: 'autoecole',
+        description: 'A full-stack web application for driving schools info in Rwanda',
+        image: '/images/autoecole.JPG',
+        tools: ['Java', 'Spring Boot', 'PostgreSQL', 'React', 'Tailwind'],
+        link: 'https://auto-ecole-rwanda.web.app/',
+        githubFrontEnd: 'https://github.com/Nide17/auto-ecole',
+        githubBackEnd: 'https://github.com/Nide17/autoecole-backend'
+    },
+    {
+        id: 8,
         title: 'TodoPlanna',
         slug: 'todoplanna',
         description: 'A full-stack web application for a to do planning tool',
@@ -75,17 +86,6 @@ const projects = [
         link: 'www.todoplanna.live',
         githubFrontEnd: 'https://github.com/Nide17/ToDoPlanna',
         githubBackEnd: 'https://github.com/Nide17/to-do-planna-nest'
-    },
-    {
-        id: 8,
-        title: 'Hortiprice',
-        slug: 'hortiprice',
-        description: 'A full-stack web application for horticulture business plans',
-        image: '/images/hortiprice.JPG',
-        tools: ['PHP', 'MySQL', 'Bootstrap', 'HTML', 'CSS'],
-        link: null,
-        githubFrontEnd: 'https://github.com/Nide17/hortiprice',
-        githubBackEnd: null
     },
     {
         id: 9,
