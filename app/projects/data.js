@@ -70,7 +70,7 @@ const projects = [
         title: 'Auto Ecole',
         slug: 'autoecole',
         description: 'A full-stack web application for driving schools info in Rwanda',
-        image: '/images/autoecole.JPG',
+        image: '/images/autoecole.jpg',
         tools: ['Java', 'Spring Boot', 'PostgreSQL', 'React', 'Tailwind'],
         link: 'https://auto-ecole-rwanda.web.app/',
         githubFrontEnd: 'https://github.com/Nide17/auto-ecole',
