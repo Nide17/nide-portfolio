@@ -83,7 +83,7 @@ const projects = [
         description: 'A full-stack web application for a to do planning tool',
         image: '/images/todoplanna.jpg',
         tools: [' React.js', 'Tailwind CSS', 'NestJS', 'Sequelize', 'MySQL'],
-        link: 'www.todoplanna.live',
+        link: 'https://www.todoplanna.live/',
         githubFrontEnd: 'https://github.com/Nide17/ToDoPlanna',
         githubBackEnd: 'https://github.com/Nide17/to-do-planna-nest'
     },
