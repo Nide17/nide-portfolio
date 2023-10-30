@@ -34,14 +34,14 @@ const projects = [
     },
     {
         id: 4,
-        title: 'Okaziyo',
-        slug: 'okaziyo',
+        title: 'Amahirwe',
+        slug: 'amahirwe',
         description: 'A full-stack MERN web application for selling and buying no longer used items',
         image: '/images/okaziyo.JPG',
         tools: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Bootstrap'],
-        link: 'https://okaziyo.netlify.app/',
-        githubFrontEnd: 'https://github.com/Nide17/okaziyo-client',
-        githubBackEnd: 'https://github.com/Nide17/okaziyo-server'
+        link: 'https://amahirwe.com/',
+        githubFrontEnd: 'https://github.com/Nide17/amahirwe-client',
+        githubBackEnd: 'https://github.com/Nide17/amahirwe-server'
     },
     {
         id: 5,
