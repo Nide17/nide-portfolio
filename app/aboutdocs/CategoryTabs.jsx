@@ -7,9 +7,9 @@ import ReactLoading from 'react-loading';
 
 const CategoryTabs = ({ aboutdocs, loading }) => {
 
-    const resumes = aboutdocs && aboutdocs.filter(doc => doc.categoryId === 2).sort((a, b) => a.title.localeCompare(b.title))
-    const certificates = aboutdocs && aboutdocs.filter(doc => doc.categoryId === 3).sort((a, b) => a.title.localeCompare(b.title))
-    const academics = aboutdocs && aboutdocs.filter(doc => doc.categoryId === 4).sort((a, b) => a.title.localeCompare(b.title))
+    const resumes = aboutdocs && aboutdocs.filter(doc => doc.categoryId === 2).sort((a, b) => a.id - b.id)
+    const certificates = aboutdocs && aboutdocs.filter(doc => doc.categoryId === 3).sort((a, b) => a.id - b.id)
+    const academics = aboutdocs && aboutdocs.filter(doc => doc.categoryId === 4).sort((a, b) => a.id - b.id)
 
     return (
         loading ?
@@ -21,22 +21,22 @@ const CategoryTabs = ({ aboutdocs, loading }) => {
                 <div className={tabsStyles.tabs}>
                     <Tabs>
                         <TabList>
-                            <Tab>Resumes</Tab>
+                            <Tab>Resume</Tab>
                             <Tab>Certificates</Tab>
                             <Tab>Academics</Tab>
                         </TabList>
 
                         <TabPanel>
-                            <h2>A<span>ll Resumes</span></h2>
+                            <h2>R<span>esumes</span></h2>
                             <DocsCollapse documents={resumes} />
                         </TabPanel>
                         <TabPanel>
-                            <h2>A<span>ll Certificates</span></h2>
+                            <h2>C<span>ertificates</span></h2>
                             <DocsCollapse documents={certificates} />
                         </TabPanel>
 
                         <TabPanel>
-                            <h2>A<span>ll Academics</span></h2>
+                            <h2>A<span>cademics</span></h2>
                             <DocsCollapse documents={academics} />
                         </TabPanel>
                     </Tabs>

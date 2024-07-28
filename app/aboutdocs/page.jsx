@@ -26,14 +26,17 @@ export default function AboutDocs() {
                     <Image src="/images/NIDEiMAGE.JPG" alt="nideimage" width={280} height={280} />
                 </div>
                 <p>
-                    I am a skilled Full-Stack Software Engineer with over 3+ years of experience, specializing in both front-end and back-end development. I excel in utilizing a diverse range of technologies, including React.js, Redux, Next.js, Bootstrap for front-end, and Node.js, Express.js, Flask, SpringBoot, MongoDB, and PostgreSQL for back-end development. Besides, I am also experienced in Data Analysis and IT Support Engineering, leveraging my analytical skills and IT expertise to provide valuable insights and technical assistance within organizations.
+                    I am an experienced Full-Stack Software Engineer with over 4 years of industry experience, with both front-end and back-end development professional skills. I excel in utilizing a diverse range of technologies, including Node/Express, Flask, SpringBoot, MongoDB, PostgreSQL, React.js, Redux, Next.js, Bootstrap, Tailwind and more. Besides, I am also skilled in Data Analysis and IT Engineering, leveraging my analytical skills and IT expertise to provide valuable insights and technical assistance within organizations.
                 </p>
 
                 <div>
-                    My commitment to continuous learning is underscored by holding a Scrum Master™ certification and 10+ other engineering certificates, allowing me to consistently deliver innovative and efficient solutions that meet or exceed evolving business needs while ensuring the smooth operation of IT systems.
+                    My commitment to continuous learning is shown by having acquired a Scrum Master™ certification and 10+ other engineering certificates.
+                    <br />
+                    <br />
+                    This allows me to consistently deliver innovative and efficient solutions that meet or exceed evolving business needs while ensuring the smooth operation of IT systems.
                     <br />
                     <blockquote style={{ color: "aquamarine" }}>
-                        Hope to work with you for your next project!
+                        I hope to work with you for your next project!
                     </blockquote>
                 </div>
             </div>

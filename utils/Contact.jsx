@@ -65,7 +65,7 @@ export default function Contact() {
                 <h2>C<span>ontact Me</span></h2>
                 <div className="contactText">
                     <p>
-                        &quot;Interested in discussing a project, collaboration, or any other matter? Please don't hesitate to reach out—I'm always open and eager to hear from you!&quot;</p>
+                        &quot;Do you have a project to discuss? a collaboration, an idea? <br /> Please reach out me — I'm open and eager to hear from you!&quot;</p>
                 </div>
                 <div className={contactStyles.reachMe}>
                     <div className={contactStyles.reachMeImg}>
@@ -90,7 +90,7 @@ export default function Contact() {
                     </div>}
 
                 {error && <div style={{ textAlign: "center", color: "red" }}>Something went wrong! Please try again later.</div>}
-                {success && <div style={{ textAlign: "center", color: "green" }}>Message sent successfully!</div>}
+                {success && <div style={{ textAlign: "center", color: "white" }}>Message sent successfully!</div>}
 
                 <form onSubmit={onSubmitHandler}>
                     <div className="inputRow">

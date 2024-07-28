@@ -26,7 +26,7 @@ export default function Project() {
                     <Image src={project.image} alt={project.title} width={400} height={194}></Image>
 
                     <div className={projectStyles.techNvisit}>
-                        <p>Notable Technologies: <span>
+                        <p>Technologies: <span>
                             {
                                 project.tools.map((tool, index) => {
                                     return <span key={index}>{tool}, </span>

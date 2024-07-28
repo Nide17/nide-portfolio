@@ -45,13 +45,13 @@ const projects = [
     },
     {
         id: 5,
-        title: 'Tegura',
-        slug: 'tegura',
+        title: 'Itsindire',
+        slug: 'itsindire',
         description: 'A mobile app for road and traffic code lessons, questions and answers',
-        image: '/images/tegura.jpg',
+        image: '/images/itsindire.jpg',
         tools: ['Figma', 'Dart', 'Flutter', 'Firebase', 'Firestore'],
         link: null,
-        githubFrontEnd: 'https://github.com/Nide17/tegura',
+        githubFrontEnd: 'https://github.com/Nide17/itsindire',
         githubBackEnd: null
     },
     {
@@ -83,7 +83,7 @@ const projects = [
         description: 'A full-stack web application for a to do planning tool',
         image: '/images/todoplanna.jpg',
         tools: [' React.js', 'Tailwind CSS', 'NestJS', 'Sequelize', 'MySQL'],
-        link: 'https://www.todoplanna.live/',
+        link: 'https://to-do-planna.vercel.app/',
         githubFrontEnd: 'https://github.com/Nide17/ToDoPlanna',
         githubBackEnd: 'https://github.com/Nide17/to-do-planna-nest'
     },
