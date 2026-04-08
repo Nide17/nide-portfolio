@@ -12,14 +12,14 @@
   },
   "devDependencies": {
     "eslint": "8.5.0",
-    "eslint-config-next": "^13.5.4"
+    "eslint-config-next": "^14.2.35"
   },
   "dependencies": {
     "classnames": "^2.3.2",
-    "next": "^13.5.4",
-    "react": "^18.2.0",
+    "next": "^14.2.35",
+    "react": "^18.3.1",
     "react-collapse": "^5.1.1",
-    "react-dom": "^18.2.0",
+    "react-dom": "^18.3.1",
     "react-loading": "^2.0.3",
     "react-tabs": "^6.0.2",
     "react-type-animation": "^3.1.0"
