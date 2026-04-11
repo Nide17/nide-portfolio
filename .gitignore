@@ -1,11 +1,5 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 /node_modules
-/pages/contacts
-/styles/contacts
-/pages/api/contacts
-/utils/ContactItem.js
 /.pnp
 .pnp.js
 
@@ -29,11 +23,22 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-.env*
+.env
+.env.*
 
 # vercel
 .vercel
+
+# MCP related
+.mcp.json
+opencode.json
+config/mcporter.json
+.zed
+.vscode
+.gemini
+.cursor
+.codex
+.playwright-mcp
+
+# TypeScript build cache
+*.tsbuildinfo
