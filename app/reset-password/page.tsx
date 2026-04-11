@@ -1,28 +1,28 @@
 "use client"
-import React, { useState } from 'react'
+
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '../lib/auth-context'
 
-export default function RegisterPage() {
-    const [name, setName] = useState('')
+export default function ResetPasswordPage() {
+    const { resetPassword, isAuthenticated, isReady } = useAuth()
+    const router = useRouter()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
     const [loading, setLoading] = useState(false)
-    const { register, isAuthenticated, isReady } = useAuth()
-    const router = useRouter()
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (isReady && isAuthenticated) {
             router.replace('/dashboard')
         }
     }, [isAuthenticated, isReady, router])
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault()
+    const handleSubmit = async (event: React.FormEvent) => {
+        event.preventDefault()
         setError('')
         setSuccess('')
 
@@ -39,11 +39,11 @@ export default function RegisterPage() {
         setLoading(true)
 
         try {
-            await register(name, email, password)
-            setSuccess('Account created successfully. Redirecting to your dashboard...')
+            await resetPassword(email, password)
+            setSuccess('Password updated successfully. Redirecting to dashboard...')
             router.push('/dashboard')
-        } catch (err: any) {
-            setError(err.message || 'Registration failed')
+        } catch (submitError: any) {
+            setError(submitError.message || 'Failed to reset password')
         } finally {
             setLoading(false)
         }
@@ -56,7 +56,7 @@ export default function RegisterPage() {
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50 pt-32 pb-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
-                <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Create Account</h2>
+                <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Reset Password</h2>
 
                 {error && (
                     <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
@@ -70,20 +70,6 @@ export default function RegisterPage() {
                 )}
 
                 <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Full Name
-                        </label>
-                        <input
-                            type="text"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            placeholder="John Doe"
-                        />
-                    </div>
-
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">
                             Email
@@ -100,7 +86,7 @@ export default function RegisterPage() {
 
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Password
+                            New Password
                         </label>
                         <input
                             type="password"
@@ -114,7 +100,7 @@ export default function RegisterPage() {
 
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Confirm Password
+                            Confirm New Password
                         </label>
                         <input
                             type="password"
@@ -131,17 +117,14 @@ export default function RegisterPage() {
                         disabled={loading}
                         className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-semibold"
                     >
-                        {loading ? 'Creating account...' : 'Register'}
+                        {loading ? 'Updating password...' : 'Reset Password'}
                     </button>
                 </form>
 
                 <div className="mt-6 text-center">
-                    <p className="text-gray-600">
-                        Already have an account?{' '}
-                        <Link href="/login" className="text-blue-600 hover:text-blue-800 font-semibold">
-                            Login here
-                        </Link>
-                    </p>
+                    <Link href="/login" className="text-blue-600 hover:text-blue-800 font-semibold">
+                        Back to login
+                    </Link>
                 </div>
             </div>
         </div>

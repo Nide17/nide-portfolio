@@ -1,5 +1,6 @@
 "use client"
 import React, { useState } from 'react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '../lib/auth-context'
 
@@ -8,8 +9,14 @@ export default function LoginPage() {
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
-    const { login } = useAuth()
+    const { login, isAuthenticated, isReady } = useAuth()
     const router = useRouter()
+
+    React.useEffect(() => {
+        if (isReady && isAuthenticated) {
+            router.replace('/dashboard')
+        }
+    }, [isAuthenticated, isReady, router])
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -26,8 +33,12 @@ export default function LoginPage() {
         }
     }
 
+    if (!isReady) {
+        return <div className="min-h-screen bg-gray-50 pt-32 text-center">Loading...</div>
+    }
+
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen flex items-center justify-center bg-gray-50 pt-32 pb-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
                 <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Login</h2>
 
@@ -75,12 +86,18 @@ export default function LoginPage() {
                     </button>
                 </form>
 
+                <div className="mt-4 text-center">
+                    <Link href="/reset-password" className="text-sm text-blue-600 hover:text-blue-800 font-semibold">
+                        Forgot your password?
+                    </Link>
+                </div>
+
                 <div className="mt-6 text-center">
                     <p className="text-gray-600">
                         Don&apos;t have an account?{' '}
-                        <a href="/register" className="text-blue-600 hover:text-blue-800 font-semibold">
+                        <Link href="/register" className="text-blue-600 hover:text-blue-800 font-semibold">
                             Register here
-                        </a>
+                        </Link>
                     </p>
                 </div>
             </div>

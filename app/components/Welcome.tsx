@@ -1,7 +1,7 @@
 "use client"
 import { useEffect } from 'react'
 import Image from 'next/image'
-import { trackVisit, getClientIP, getDeviceInfo } from '../lib/api'
+import { trackVisit, getClientIP, getDeviceInfo, shouldTrackVisit, markVisitTracked } from '../lib/api'
 
 export default function Welcome() {
     useEffect(() => {
@@ -9,9 +9,16 @@ export default function Welcome() {
         const trackPageVisit = async () => {
             try {
                 const ip = await getClientIP()
+                if (!shouldTrackVisit(ip)) {
+                    if (process.env.NODE_ENV !== 'production') {
+                        console.log('[tracking] Skipping visit tracking: cached within 24 hours for IP', ip)
+                    }
+                    return
+                }
+
                 const { browser, os, device } = getDeviceInfo()
 
-                await trackVisit({
+                const result = await trackVisit({
                     ip_address: ip,
                     device,
                     operating_system: os,
@@ -19,6 +26,10 @@ export default function Welcome() {
                     path: '/',
                     referrer: document.referrer || undefined
                 })
+
+                if (result) {
+                    markVisitTracked(ip)
+                }
             } catch (error) {
                 console.error('Failed to track visit:', error)
             }

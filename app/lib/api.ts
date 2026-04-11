@@ -1,16 +1,173 @@
 // API utility functions for interacting with the FastAPI backend
 import { API_BASE_URL } from '../config'
 
+export interface ProjectPayload {
+    title: string
+    description?: string
+    image?: string
+    github?: string
+    live_at?: string
+    technologies?: string[]
+}
+
+export interface MessagePayload {
+    sender_name: string
+    sender_email: string
+    subject: string
+    body: string
+}
+
+export interface VisitPayload {
+    ip_address: string
+    device?: string
+    operating_system?: string
+    browser?: string
+    path?: string
+    referrer?: string
+}
+
+export interface DownloadPayload {
+    ip_address: string
+    document_name: string
+    device?: string
+    operating_system?: string
+    browser?: string
+    country?: string
+    referrer?: string
+}
+
+export interface UserPayload {
+    name: string
+    email: string
+    password: string
+    role?: string
+}
+
+export interface UserRecord extends UserPayload {
+    id?: number
+}
+
+interface TrackingCacheEntry {
+    ip: string
+    timestamp: number
+}
+
+const ONE_DAY_MS = 24 * 60 * 60 * 1000
+const CLIENT_IP_CACHE_KEY = 'client-ip-cache'
+const VISIT_TRACKING_CACHE_KEY = 'visit-tracking-cache'
+const DOWNLOAD_TRACKING_CACHE_KEY = 'download-tracking-cache'
+
+async function requestJson<T>(path: string, init?: RequestInit): Promise<T> {
+    const response = await fetch(`${API_BASE_URL}${path}`, init)
+
+    if (!response.ok) {
+        let detail = ''
+
+        try {
+            const errorData = await response.json()
+            detail = errorData?.detail || errorData?.message || ''
+        } catch {
+            detail = ''
+        }
+
+        throw new Error(detail ? `${detail} (HTTP ${response.status})` : `Request failed with status ${response.status}`)
+    }
+
+    if (response.status === 204) {
+        return null as T
+    }
+
+    return response.json()
+}
+
+function withJsonBody(body: unknown, init?: RequestInit): RequestInit {
+    return {
+        ...init,
+        headers: {
+            'Content-Type': 'application/json',
+            ...(init?.headers || {})
+        },
+        body: JSON.stringify(body)
+    }
+}
+
+function readTrackingCache(key: string): TrackingCacheEntry | null {
+    if (typeof window === 'undefined') return null
+
+    try {
+        const raw = localStorage.getItem(key)
+        if (!raw) return null
+
+        const parsed = JSON.parse(raw) as TrackingCacheEntry
+        if (!parsed?.ip || typeof parsed.timestamp !== 'number') return null
+        return parsed
+    } catch (error) {
+        console.error(`Failed to read local cache for ${key}:`, error)
+        return null
+    }
+}
+
+function writeTrackingCache(key: string, entry: TrackingCacheEntry) {
+    if (typeof window === 'undefined') return
+
+    try {
+        localStorage.setItem(key, JSON.stringify(entry))
+    } catch (error) {
+        console.error(`Failed to write local cache for ${key}:`, error)
+    }
+}
+
+function isFreshCacheEntry(entry: TrackingCacheEntry | null) {
+    return !!entry && Date.now() - entry.timestamp < ONE_DAY_MS
+}
+
 // Helper to get client IP address
 export async function getClientIP() {
+    const cachedIp = readTrackingCache(CLIENT_IP_CACHE_KEY)
+    if (isFreshCacheEntry(cachedIp)) {
+        return cachedIp?.ip;
+    }
+
     try {
         const response = await fetch('https://api.ipify.org?format=json')
         const data = await response.json()
+        writeTrackingCache(CLIENT_IP_CACHE_KEY, {
+            ip: data.ip,
+            timestamp: Date.now()
+        })
         return data.ip
     } catch (error) {
         console.error('Failed to get IP:', error)
         return '0.0.0.0'
     }
+}
+
+function shouldTrackForKey(key: string, ip: string) {
+    const cachedEntry = readTrackingCache(key)
+    return !(isFreshCacheEntry(cachedEntry) && cachedEntry?.ip === ip)
+}
+
+function markTrackedForKey(key: string, ip: string) {
+    writeTrackingCache(key, {
+        ip,
+        timestamp: Date.now()
+    })
+}
+
+export function shouldTrackVisit(ip: string) {
+    return shouldTrackForKey(VISIT_TRACKING_CACHE_KEY, ip)
+}
+
+export function markVisitTracked(ip: string) {
+    markTrackedForKey(VISIT_TRACKING_CACHE_KEY, ip)
+}
+
+export function shouldTrackDownload(ip: string) {
+    return shouldTrackForKey(DOWNLOAD_TRACKING_CACHE_KEY, ip)
+}
+
+export function markDownloadTracked(ip: string) {
+    markTrackedForKey(DOWNLOAD_TRACKING_CACHE_KEY, ip)
 }
 
 // Helper to get country from IP address
@@ -32,20 +189,17 @@ export function getDeviceInfo() {
     let os = 'Unknown'
     let device = 'Desktop'
 
-    // Detect OS
     if (ua.indexOf('Win') > -1) os = 'Windows'
     else if (ua.indexOf('Mac') > -1) os = 'macOS'
     else if (ua.indexOf('Linux') > -1) os = 'Linux'
     else if (ua.indexOf('Android') > -1) os = 'Android'
     else if (ua.indexOf('iPhone') > -1 || ua.indexOf('iPad') > -1) os = 'iOS'
 
-    // Detect browser
     if (ua.indexOf('Firefox') > -1) browser = 'Firefox'
     else if (ua.indexOf('Chrome') > -1) browser = 'Chrome'
     else if (ua.indexOf('Safari') > -1) browser = 'Safari'
     else if (ua.indexOf('Edge') > -1) browser = 'Edge'
 
-    // Detect device type
     if (/Mobile|Android|iPhone/.test(ua)) device = 'Mobile'
     else if (/Tablet|iPad/.test(ua)) device = 'Tablet'
 
@@ -55,97 +209,64 @@ export function getDeviceInfo() {
 // ===== PROJECTS =====
 export async function fetchProjects() {
     try {
-        const response = await fetch(`${API_BASE_URL}/projects/`)
-        if (!response.ok) throw new Error('Failed to fetch projects')
-        return await response.json()
+        return await requestJson<any[]>('/projects/')
     } catch (error) {
-        console.log('Error fetching projects:', error)
+        console.error('Error fetching projects:', error)
         return []
     }
 }
 
-export async function createProject(projectData: any) {
-    try {
-        // Patch the payload to avoid backend failure with technologies array and image URL
-        const patchedData = {
-            ...projectData,
-            technologies: null, // Backend currently fails with array, set to null for now
-            image: null // Backend currently fails with image URLs, set to null for now
-        }
-
-        const response = await fetch(`${API_BASE_URL}/projects/`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(patchedData)
-        })
-        if (!response.ok) throw new Error('Failed to create project')
-        return await response.json()
-    } catch (error) {
-        console.error('Error creating project:', error)
-        throw error
-    }
+export async function fetchProjectById(projectId: string | number) {
+    return requestJson<any>(`/projects/${projectId}`)
 }
 
-export async function updateProject(projectId: number, projectData: any) {
-    try {
-        const response = await fetch(`${API_BASE_URL}/projects/${projectId}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(projectData)
-        })
-        if (!response.ok) throw new Error('Failed to update project')
-        return await response.json()
-    } catch (error) {
-        console.error('Error updating project:', error)
-        throw error
-    }
+export async function createProject(projectData: ProjectPayload) {
+    return requestJson<any>('/projects/', withJsonBody(projectData, { method: 'POST' }))
+}
+
+export async function updateProject(projectId: number, projectData: ProjectPayload) {
+    return requestJson<any>(`/projects/${projectId}`, withJsonBody(projectData, { method: 'PUT' }))
 }
 
 export async function deleteProject(projectId: number) {
-    try {
-        const response = await fetch(`${API_BASE_URL}/projects/${projectId}`, {
-            method: 'DELETE'
-        })
-        if (!response.ok) throw new Error('Failed to delete project')
-        return await response.json()
-    } catch (error) {
-        console.error('Error deleting project:', error)
-        throw error
-    }
+    return requestJson<any>(`/projects/${projectId}`, { method: 'DELETE' })
 }
 
 // ===== MESSAGES =====
-export async function sendMessage(messageData: {
-    sender_name: string
-    sender_email: string
-    subject: string
-    body: string
-}) {
+export async function sendMessage(messageData: MessagePayload) {
+    return requestJson<any>('/messages/', withJsonBody(messageData, { method: 'POST' }))
+}
+
+export async function fetchMessages() {
     try {
-        const response = await fetch(`${API_BASE_URL}/messages/`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(messageData)
-        })
-        if (!response.ok) throw new Error('Failed to send message')
-        return await response.json()
+        return await requestJson<any[]>('/messages/')
     } catch (error) {
-        console.error('Error sending message:', error)
-        throw error
+        console.error('Error fetching messages:', error)
+        return []
     }
 }
 
-// ===== VISITS =====
-const VISIT_TRACKING_TIMEOUT_MS = 10_000 // 10 seconds timeout for visit tracking
+export async function deleteMessage(messageId: number) {
+    return requestJson<any>(`/messages/${messageId}`, { method: 'DELETE' })
+}
 
-export async function trackVisit(visitData: {
-    ip_address: string
-    device?: string
-    operating_system?: string
-    browser?: string
-    path?: string
-    referrer?: string
-}) {
+// ===== VISITS =====
+export async function fetchVisits() {
+    try {
+        return await requestJson<any[]>('/visits/')
+    } catch (error) {
+        console.error('Error fetching visits:', error)
+        return []
+    }
+}
+
+export async function deleteVisit(visitId: number) {
+    return requestJson<any>(`/visits/${visitId}`, { method: 'DELETE' })
+}
+
+const VISIT_TRACKING_TIMEOUT_MS = 10_000
+
+export async function trackVisit(visitData: VisitPayload) {
     const maxRetries = 3
 
     for (let attempt = 0; attempt <= maxRetries; attempt++) {
@@ -153,40 +274,27 @@ export async function trackVisit(visitData: {
             const controller = new AbortController()
             const timeoutId = setTimeout(() => controller.abort(), VISIT_TRACKING_TIMEOUT_MS)
 
-            const response = await fetch(`${API_BASE_URL}/visits/`, {
+            const response = await fetch(`${API_BASE_URL}/visits/`, withJsonBody(visitData, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(visitData),
                 signal: controller.signal
-            })
+            }))
 
             clearTimeout(timeoutId)
 
             if (!response.ok) {
                 if ((response.status === 503 || response.status >= 500) && attempt < maxRetries) {
-                    // Server error or service unavailable, retry with exponential backoff
                     const waitTime = Math.pow(2, attempt) * 1000
-                    console.log(`Visit tracking failed (${response.status}), retrying in ${waitTime}ms... (attempt ${attempt + 1}/${maxRetries})`)
-                    await new Promise(resolve => setTimeout(resolve, waitTime))
+                    await new Promise((resolve) => setTimeout(resolve, waitTime))
                     continue
                 }
-                console.warn('Visit tracking failed:', response.status)
                 return null
             }
 
             return await response.json()
         } catch (error: any) {
-            if (error?.name === 'AbortError' && attempt < maxRetries) {
-                const waitTime = Math.pow(2, attempt) * 1000
-                console.log(`Visit tracking timeout, retrying in ${waitTime}ms... (attempt ${attempt + 1}/${maxRetries})`)
-                await new Promise(resolve => setTimeout(resolve, waitTime))
-                continue
-            }
-
             if (attempt < maxRetries) {
                 const waitTime = Math.pow(2, attempt) * 1000
-                console.log(`Visit tracking error: ${error?.message}, retrying in ${waitTime}ms... (attempt ${attempt + 1}/${maxRetries})`)
-                await new Promise(resolve => setTimeout(resolve, waitTime))
+                await new Promise((resolve) => setTimeout(resolve, waitTime))
                 continue
             }
 
@@ -199,61 +307,41 @@ export async function trackVisit(visitData: {
 }
 
 // ===== DOWNLOADS =====
-export async function trackDownload(downloadData: {
-    ip_address: string
-    document_name: string
-    device?: string
-    operating_system?: string
-    browser?: string
-    country?: string
-    referrer?: string
-}) {
+export async function trackDownload(downloadData: DownloadPayload) {
     const maxRetries = 3
-    const timeout = 10000 // 10 seconds per attempt
+    const timeout = 10_000
 
     for (let attempt = 0; attempt <= maxRetries; attempt++) {
         try {
             const controller = new AbortController()
             const timeoutId = setTimeout(() => controller.abort(), timeout)
 
-            const response = await fetch(`${API_BASE_URL}/downloads/`, {
+            const response = await fetch(`${API_BASE_URL}/downloads/`, withJsonBody(downloadData, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(downloadData),
                 signal: controller.signal
-            })
+            }))
 
             clearTimeout(timeoutId)
 
             if (!response.ok) {
                 if ((response.status === 503 || response.status >= 500) && attempt < maxRetries) {
-                    // Server error or service unavailable, retry with exponential backoff
                     const waitTime = Math.pow(2, attempt) * 1000
-                    console.log(`Download tracking failed (${response.status}), retrying in ${waitTime}ms... (attempt ${attempt + 1}/${maxRetries})`)
-                    await new Promise(resolve => setTimeout(resolve, waitTime))
+                    await new Promise((resolve) => setTimeout(resolve, waitTime))
                     continue
                 }
+
                 throw new Error(`HTTP ${response.status}: ${response.statusText}`)
             }
 
             return await response.json()
         } catch (error: any) {
-            if (error?.name === 'AbortError' && attempt < maxRetries) {
-                const waitTime = Math.pow(2, attempt) * 1000
-                console.log(`Download tracking timeout, retrying in ${waitTime}ms... (attempt ${attempt + 1}/${maxRetries})`)
-                await new Promise(resolve => setTimeout(resolve, waitTime))
-                continue
-            }
-
             if (attempt < maxRetries) {
                 const waitTime = Math.pow(2, attempt) * 1000
-                console.log(`Download tracking error: ${error?.message}, retrying in ${waitTime}ms... (attempt ${attempt + 1}/${maxRetries})`)
-                await new Promise(resolve => setTimeout(resolve, waitTime))
+                await new Promise((resolve) => setTimeout(resolve, waitTime))
                 continue
             }
 
             console.error('Error tracking download after all retries:', error)
-            // Don't throw error - download should still work even if tracking fails
             return null
         }
     }
@@ -261,32 +349,27 @@ export async function trackDownload(downloadData: {
     return null
 }
 
-// ===== USERS & AUTH =====
-export async function registerUser(userData: {
-    name: string
-    email: string
-    password: string
-    role?: string
-}) {
+export async function fetchDownloads() {
     try {
-        const response = await fetch(`${API_BASE_URL}/users/`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(userData)
-        })
-        if (!response.ok) throw new Error('Failed to register')
-        return await response.json()
+        return await requestJson<any[]>('/downloads/')
     } catch (error) {
-        console.error('Error registering user:', error)
-        throw error
+        console.error('Error fetching downloads:', error)
+        return []
     }
+}
+
+export async function deleteDownload(downloadId: number) {
+    return requestJson<any>(`/downloads/${downloadId}`, { method: 'DELETE' })
+}
+
+// ===== USERS & AUTH =====
+export async function registerUser(userData: UserPayload) {
+    return requestJson<any>('/users/', withJsonBody(userData, { method: 'POST' }))
 }
 
 export async function fetchUsers() {
     try {
-        const response = await fetch(`${API_BASE_URL}/users/`)
-        if (!response.ok) throw new Error('Failed to fetch users')
-        return await response.json()
+        return await requestJson<any[]>('/users/')
     } catch (error) {
         console.error('Error fetching users:', error)
         return []
@@ -295,14 +378,17 @@ export async function fetchUsers() {
 
 export async function getUserByEmail(email: string) {
     try {
-        const response = await fetch(`${API_BASE_URL}/users/email/${email}`)
-        if (!response.ok) {
-            if (response.status === 404) return null
-            throw new Error('Failed to fetch user')
+        return await requestJson<UserRecord>(`/users/email/${email}`)
+    } catch (error: any) {
+        if (String(error?.message || '').toLowerCase().includes('404')) {
+            return null
         }
-        return await response.json()
-    } catch (error) {
+
         console.error('Error fetching user:', error)
         return null
     }
+}
+
+export async function updateUser(userId: number, userData: UserPayload) {
+    return requestJson<UserRecord>(`/users/${userId}`, withJsonBody(userData, { method: 'PUT' }))
 }

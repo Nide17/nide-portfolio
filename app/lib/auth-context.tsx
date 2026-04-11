@@ -1,6 +1,6 @@
 "use client"
 import React, { createContext, useContext, useState, useEffect } from 'react'
-import { API_BASE_URL } from '../config'
+import { getUserByEmail, registerUser, updateUser, type UserRecord } from './api'
 
 interface User {
     id?: number
@@ -12,8 +12,10 @@ interface User {
 interface AuthContextType {
     user: User | null
     isAuthenticated: boolean
+    isReady: boolean
     login: (email: string, password: string) => Promise<void>
     register: (name: string, email: string, password: string) => Promise<void>
+    resetPassword: (email: string, password: string) => Promise<void>
     logout: () => void
 }
 
@@ -22,6 +24,20 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [user, setUser] = useState<User | null>(null)
     const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const [isReady, setIsReady] = useState(false)
+
+    const persistSession = (userData: UserRecord) => {
+        const sessionUser = {
+            id: userData.id,
+            name: userData.name,
+            email: userData.email,
+            role: userData.role
+        }
+
+        setUser(sessionUser)
+        setIsAuthenticated(true)
+        localStorage.setItem('user', JSON.stringify(sessionUser))
+    }
 
     // Load user from localStorage on mount
     useEffect(() => {
@@ -36,40 +52,50 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 console.error('Failed to load user:', error)
             }
         }
+        setIsReady(true)
     }, [])
 
     const login = async (email: string, password: string) => {
-        // For now, we'll use a simple validation
-        // In a real app, you'd verify password against the backend
-        // For MVP, we'll just verify the user exists
-        const response = await fetch(`${API_BASE_URL}/users/email/${email}`)
-        if (!response.ok) {
+        const userData = await getUserByEmail(email)
+        if (!userData) {
             throw new Error('User not found')
         }
-        const userData = await response.json()
 
-        // Store user and authentication state
-        setUser(userData)
-        setIsAuthenticated(true)
-        localStorage.setItem('user', JSON.stringify(userData))
+        if (!('password' in userData) || typeof userData.password !== 'string') {
+            throw new Error('Backend user record does not support password verification')
+        }
+
+        if (userData.password !== password) {
+            throw new Error('Invalid email or password')
+        }
+
+        persistSession(userData)
     }
 
     const register = async (name: string, email: string, password: string) => {
-        const response = await fetch(`${API_BASE_URL}/users/`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, password })
-        })
-
-        if (!response.ok) {
-            const error = await response.json()
-            throw new Error(error.detail || 'Registration failed')
+        const existingUser = await getUserByEmail(email)
+        if (existingUser) {
+            throw new Error('An account with this email already exists')
         }
 
-        const userData = await response.json()
-        setUser(userData)
-        setIsAuthenticated(true)
-        localStorage.setItem('user', JSON.stringify(userData))
+        const userData = await registerUser({ name, email, password })
+        persistSession(userData)
+    }
+
+    const resetPassword = async (email: string, password: string) => {
+        const existingUser = await getUserByEmail(email)
+        if (!existingUser || typeof existingUser.id !== 'number') {
+            throw new Error('User not found')
+        }
+
+        const updatedUser = await updateUser(existingUser.id, {
+            name: existingUser.name,
+            email: existingUser.email,
+            role: existingUser.role,
+            password
+        })
+
+        persistSession(updatedUser)
     }
 
     const logout = () => {
@@ -79,7 +105,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
 
     return (
-        <AuthContext.Provider value={{ user, isAuthenticated, login, register, logout }}>
+        <AuthContext.Provider value={{ user, isAuthenticated, isReady, login, register, resetPassword, logout }}>
             {children}
         </AuthContext.Provider>
     )

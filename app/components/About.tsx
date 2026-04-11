@@ -1,5 +1,5 @@
 "use client"
-import { getClientIP, getDeviceInfo, trackDownload, getCountryFromIP } from '../lib/api'
+import { getClientIP, getDeviceInfo, trackDownload, getCountryFromIP, shouldTrackDownload, markDownloadTracked } from '../lib/api'
 
 export default function About() {
     const handleCVdownload = async () => {
@@ -14,10 +14,17 @@ export default function About() {
         // Track download asynchronously (won't block the download)
         try {
             const ip = await getClientIP()
+            if (!shouldTrackDownload(ip)) {
+                if (process.env.NODE_ENV !== 'production') {
+                    console.log('[tracking] Skipping CV download tracking: cached within 24 hours for IP', ip)
+                }
+                return
+            }
+
             const country = await getCountryFromIP(ip)
             const { browser, os, device } = getDeviceInfo()
 
-            await trackDownload({
+            const result = await trackDownload({
                 ip_address: ip,
                 document_name: 'CV - Niyomwungeri Parmenide Ishimwe',
                 device,
@@ -26,6 +33,10 @@ export default function About() {
                 country,
                 referrer: document.referrer || undefined
             })
+
+            if (result) {
+                markDownloadTracked(ip)
+            }
         } catch (error) {
             console.error('Failed to track download:', error)
             // Download still works even if tracking fails
