@@ -421,3 +421,7 @@ export interface LoginResponse {
 export async function loginUser(email: string, password: string) {
     return requestAPIJson<LoginResponse>('/users/login', requestAPIJsonWithBody({ email, password }, { method: 'POST' }));
 }
+
+export async function getCurrentUser() {
+    return requestAPIJson<UserRecord>('/users/me');
+}

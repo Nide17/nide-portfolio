@@ -1,6 +1,6 @@
 "use client"
 import React, { createContext, useContext, useState, useEffect } from 'react'
-import { registerUser, logoutUser, loginUser } from './api'
+import { registerUser, logoutUser, loginUser, getCurrentUser } from './api'
 
 interface User {
     id?: number
@@ -39,6 +39,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const loginResponse = await loginUser(email, password);
         localStorage.setItem('access_token', loginResponse.access_token);
         localStorage.setItem('user_email', email);
+        const currentUserData = await getCurrentUser();
+        setUser(currentUserData);
         setIsAuthenticated(true);
     }
 

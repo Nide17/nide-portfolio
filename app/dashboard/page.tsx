@@ -14,8 +14,10 @@ import {
     fetchMessages,
     fetchProjects,
     fetchVisits,
+    getCurrentUser,
     updateProject,
-    type ProjectPayload
+    type ProjectPayload,
+    type UserRecord
 } from '../lib/api'
 
 interface Message {
@@ -70,7 +72,7 @@ const inputClassName =
     'w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500'
 
 export default function Dashboard() {
-    const { isAuthenticated, isReady, logout, user } = useAuth()
+    const { isAuthenticated, isReady, logout, user, login } = useAuth()
     const router = useRouter()
 
     const [activeTab, setActiveTab] = useState<TabKey>('projects')
@@ -184,6 +186,23 @@ export default function Dashboard() {
             loadDownloads()
         ])
     }, [isAuthenticated, isReady, loadDownloads, loadMessages, loadProjects, loadVisits, router])
+
+    // getCurrentUser fetches on demand if needed
+    const [currentUser, setCurrentUser] = useState<UserRecord | null>(null);
+
+    useEffect(() => {
+        if (isAuthenticated && localStorage.getItem('access_token')) {
+            getCurrentUser().then(setCurrentUser).catch((err) => {
+                if (err.message.includes('401')) {
+                    // Invalid token, logout
+                    localStorage.removeItem('access_token');
+                    router.push('/login');
+                } else {
+                    console.error('Failed to fetch current user:', err);
+                }
+            });
+        }
+    }, [isAuthenticated, router]);
 
     const resetProjectForm = () => {
         setProjectForm(emptyProjectForm)
@@ -415,9 +434,25 @@ export default function Dashboard() {
                 <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                     <div>
                         <h1 className="text-3xl font-bold text-slate-900">Dashboard</h1>
-                        <p className="mt-2 text-slate-600">
-                            Welcome to your dashboard. Manage content and review activity.
-                        </p>
+                        {currentUser ? (
+                            <>
+                                <p className="mt-2 text-2xl font-bold bg-linear-to-r from-blue-600 to-sky-400 bg-clip-text text-transparent">
+                                    Welcome back, {currentUser.name}!
+                                </p>
+                                <p className="text-slate-600">
+                                    Manage content and review activity.
+                                </p>
+                            </>
+                        ) : (
+                            <>
+                                <p className="mt-2 text-slate-600">
+                                    Welcome to your dashboard.
+                                </p>
+                                <p className="text-sm text-slate-500 mt-1">
+                                    Manage content and review activity.
+                                </p>
+                            </>
+                        )}
 
                     </div>
 
