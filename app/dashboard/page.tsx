@@ -95,7 +95,7 @@ export default function Dashboard() {
     const [deletingKey, setDeletingKey] = useState<string | null>(null)
     const [showProjectForm, setShowProjectForm] = useState(false)
     const [editingProjectId, setEditingProjectId] = useState<number | null>(null)
-    const [projectForm, setProjectForm] = useState<Project>(emptyProjectForm)
+    const [projectForm, setProjectForm] = useState<Project & { technologiesRaw?: string }>(emptyProjectForm)
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
 
@@ -256,15 +256,27 @@ export default function Dashboard() {
         )
     }, [downloads, query])
 
-    const handleProjectSubmit = async (event: React.FormEvent) => {
+    const handleProjectSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
         event.preventDefault()
         setError('')
         setSuccess('')
         setSavingProject(true)
 
         const previousProjects = projects
-        const optimisticProject: Project = {
+        const displayValue = projectForm.technologiesRaw || (projectForm.technologies || []).join('; ')
+        const parsedTechnologies = displayValue
+            .split(/[;,]+/)
+            .map((t: string) => t.trim())
+            .filter((t: string) => t.length > 0)
+            .filter((t: string, i: number, arr: string[]) => arr.indexOf(t) === i);
+
+        const submitForm = {
             ...projectForm,
+            technologies: parsedTechnologies
+        };
+
+        const optimisticProject: Project = {
+            ...submitForm,
             id: editingProjectId ?? Date.now()
         }
 
@@ -278,13 +290,14 @@ export default function Dashboard() {
 
         try {
             if (editingProjectId) {
-                await updateProject(editingProjectId, projectForm)
+                await updateProject(editingProjectId, submitForm)
                 setSuccess('Project updated successfully.')
             } else {
-                await createProject(projectForm)
+                await createProject({ ...projectForm, technologies: parsedTechnologies })
                 setSuccess('Project created successfully.')
             }
 
+            setProjectForm({ ...projectForm, technologiesRaw: '' });
             resetProjectForm()
             await loadProjects(true)
         } catch (submitError: any) {
@@ -403,8 +416,9 @@ export default function Dashboard() {
                     <div>
                         <h1 className="text-3xl font-bold text-slate-900">Dashboard</h1>
                         <p className="mt-2 text-slate-600">
-                            {user ? `Welcome, ${user.name}.` : 'Manage content and review activity.'}
+                            Welcome to your dashboard. Manage content and review activity.
                         </p>
+
                     </div>
 
                     <div className="space-y-3">
@@ -568,22 +582,23 @@ export default function Dashboard() {
 
                                         <div className="mt-4">
                                             <Field label="Technologies">
-                                                <input
-                                                    type="text"
-                                                    value={projectForm.technologies?.join(', ')}
-                                                    onChange={(event) =>
+                                                <textarea
+                                                    rows={3}
+                                                    className={inputClassName}
+                                                    value={projectForm.technologiesRaw || (projectForm.technologies || []).join('; ')}
+                                                    onChange={(event) => {
+                                                        const rawValue = event.target.value;
                                                         setProjectForm({
                                                             ...projectForm,
-                                                            technologies: event.target.value
-                                                                .split(',')
-                                                                .map((tech) => tech.trim())
-                                                                .filter(Boolean)
-                                                        })
-                                                    }
-                                                    placeholder="React, Next.js, FastAPI"
-                                                    className={inputClassName}
+                                                            technologiesRaw: rawValue
+                                                        });
+                                                    }}
+                                                    placeholder="React, Next.js; FastAPI, TypeScript (comma, semicolon only)"
                                                 />
                                             </Field>
+                                            <p className="mt-1 text-xs text-red-600 font-medium">
+                                                Use , or ; separators to list technologies.
+                                            </p>
                                         </div>
 
                                         <div className="mt-5 flex flex-col gap-3 sm:flex-row">
@@ -618,79 +633,83 @@ export default function Dashboard() {
                                         {filteredProjects.length === 0 ? (
                                             <EmptyState text="No projects found." />
                                         ) : (
-                                            filteredProjects.map((project) => (
-                                                <div key={project.id ?? project.title} className="rounded-2xl border border-slate-200 p-4">
-                                                    <div className="flex flex-col gap-4 lg:flex-row">
-                                                        {project.image && (
-                                                            <div className="relative h-40 overflow-hidden rounded-xl bg-slate-100 lg:h-32 lg:w-56 lg:shrink-0">
-                                                                <Image src={project.image} alt={project.title} fill className="object-cover" />
-                                                            </div>
-                                                        )}
+                                            filteredProjects.map((project) => {
 
-                                                        <div className="min-w-0 flex-1">
-                                                            <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                                                                <div className="min-w-0">
-                                                                    <h3 className="font-semibold text-slate-900 wrap-break-word">{project.title}</h3>
-                                                                    {project.description && (
-                                                                        <p className="mt-1 text-sm text-slate-600 wrap-break-word">{project.description}</p>
-                                                                    )}
-                                                                </div>
 
-                                                                {project.id && (
-                                                                    <div className="flex gap-2">
-                                                                        <button
-                                                                            onClick={() => handleEditProject(project)}
-                                                                            className="rounded-lg bg-amber-500 px-3 py-1.5 text-sm text-white hover:bg-amber-600"
-                                                                        >
-                                                                            Edit
-                                                                        </button>
-                                                                        <button
-                                                                            onClick={() => handleDeleteProject(project.id as number)}
-                                                                            disabled={deletingKey === `project-${project.id}`}
-                                                                            className="rounded-lg bg-red-600 px-3 py-1.5 text-sm text-white hover:bg-red-700 disabled:opacity-60"
-                                                                        >
-                                                                            {deletingKey === `project-${project.id}` ? 'Deleting...' : 'Delete'}
-                                                                        </button>
-                                                                    </div>
-                                                                )}
-                                                            </div>
-
-                                                            {project.technologies && project.technologies.length > 0 && (
-                                                                <div className="mt-3 flex flex-wrap gap-2">
-                                                                    {project.technologies.map((tech) => (
-                                                                        <span key={tech} className="rounded-full bg-blue-50 px-2.5 py-1 text-xs font-medium text-blue-700">
-                                                                            {tech}
-                                                                        </span>
-                                                                    ))}
+                                                return (
+                                                    <div key={project.id ?? project.title} className="rounded-2xl border border-slate-200 p-4">
+                                                        <div className="flex flex-col gap-4 lg:flex-row">
+                                                            {project.image && (
+                                                                <div className="relative h-40 overflow-hidden rounded-xl bg-slate-100 lg:h-32 lg:w-56 lg:shrink-0">
+                                                                    <Image src={project.image} alt={project.title} fill className="object-cover" loading="eager" />
                                                                 </div>
                                                             )}
 
-                                                            <div className="mt-4 flex flex-wrap gap-4 text-sm">
-                                                                {project.github && (
-                                                                    <a
-                                                                        href={project.github}
-                                                                        target="_blank"
-                                                                        rel="noreferrer"
-                                                                        className="break-all text-blue-600 hover:text-blue-800"
-                                                                    >
-                                                                        GitHub
-                                                                    </a>
+                                                            <div className="min-w-0 flex-1">
+                                                                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                                                                    <div className="min-w-0">
+                                                                        <h3 className="font-semibold text-slate-900 wrap-break-word">{project.title}</h3>
+                                                                        {project.description && (
+                                                                            <p className="mt-1 text-sm text-slate-600 wrap-break-word">{project.description}</p>
+                                                                        )}
+                                                                    </div>
+
+                                                                    {project.id && (
+                                                                        <div className="flex gap-2">
+                                                                            <button
+                                                                                onClick={() => handleEditProject(project)}
+                                                                                className="rounded-lg bg-amber-500 px-3 py-1.5 text-sm text-white hover:bg-amber-600"
+                                                                            >
+                                                                                Edit
+                                                                            </button>
+                                                                            <button
+                                                                                onClick={() => handleDeleteProject(project.id as number)}
+                                                                                disabled={deletingKey === `project-${project.id}`}
+                                                                                className="rounded-lg bg-red-600 px-3 py-1.5 text-sm text-white hover:bg-red-700 disabled:opacity-60"
+                                                                            >
+                                                                                {deletingKey === `project-${project.id}` ? 'Deleting...' : 'Delete'}
+                                                                            </button>
+                                                                        </div>
+                                                                    )}
+                                                                </div>
+
+                                                                {project.technologies && project.technologies.length > 0 && (
+                                                                    <div className="mt-3 flex flex-wrap gap-2">
+                                                                        {project.technologies.map((tech) => (
+                                                                            <span key={tech} className="rounded-full bg-blue-50 px-2.5 py-1 text-xs font-medium text-blue-700">
+                                                                                {tech}
+                                                                            </span>
+                                                                        ))}
+                                                                    </div>
                                                                 )}
-                                                                {project.live_at && (
-                                                                    <a
-                                                                        href={project.live_at}
-                                                                        target="_blank"
-                                                                        rel="noreferrer"
-                                                                        className="break-all text-blue-600 hover:text-blue-800"
-                                                                    >
-                                                                        Live Site
-                                                                    </a>
-                                                                )}
+
+                                                                <div className="mt-4 flex flex-wrap gap-4 text-sm">
+                                                                    {project.github && (
+                                                                        <a
+                                                                            href={project.github}
+                                                                            target="_blank"
+                                                                            rel="noreferrer"
+                                                                            className="break-all text-blue-600 hover:text-blue-800"
+                                                                        >
+                                                                            GitHub
+                                                                        </a>
+                                                                    )}
+                                                                    {project.live_at && (
+                                                                        <a
+                                                                            href={project.live_at}
+                                                                            target="_blank"
+                                                                            rel="noreferrer"
+                                                                            className="break-all text-blue-600 hover:text-blue-800"
+                                                                        >
+                                                                            Live Site
+                                                                        </a>
+                                                                    )}
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            ))
+                                                )
+                                            })
                                         )}
                                     </div>
                                 )}

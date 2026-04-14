@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '../lib/auth-context'
@@ -15,13 +15,13 @@ export default function RegisterPage() {
     const { register, isAuthenticated, isReady } = useAuth()
     const router = useRouter()
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (isReady && isAuthenticated) {
             router.replace('/dashboard')
         }
     }, [isAuthenticated, isReady, router])
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
         e.preventDefault()
         setError('')
         setSuccess('')

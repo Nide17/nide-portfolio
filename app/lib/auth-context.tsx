@@ -1,6 +1,6 @@
 "use client"
 import React, { createContext, useContext, useState, useEffect } from 'react'
-import { getUserByEmail, registerUser, updateUser, type UserRecord } from './api'
+import { registerUser, logoutUser, loginUser } from './api'
 
 interface User {
     id?: number
@@ -26,82 +26,45 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [isReady, setIsReady] = useState(false)
 
-    const persistSession = (userData: UserRecord) => {
-        const sessionUser = {
-            id: userData.id,
-            name: userData.name,
-            email: userData.email,
-            role: userData.role
-        }
-
-        setUser(sessionUser)
-        setIsAuthenticated(true)
-        localStorage.setItem('user', JSON.stringify(sessionUser))
-    }
-
-    // Load user from localStorage on mount
+    // Load token on mount
     useEffect(() => {
-        const storedUser = localStorage.getItem('user')
-        if (storedUser) {
-            try {
-                const userData = JSON.parse(storedUser)
-                // eslint-disable-next-line react-hooks/set-state-in-effect
-                setUser(userData)
-                setIsAuthenticated(true)
-            } catch (error) {
-                console.error('Failed to load user:', error)
-            }
+        const token = localStorage.getItem('access_token')
+        if (token) {
+            setIsAuthenticated(true)
         }
         setIsReady(true)
     }, [])
 
     const login = async (email: string, password: string) => {
-        const userData = await getUserByEmail(email)
-        if (!userData) {
-            throw new Error('User not found')
-        }
-
-        if (!('password' in userData) || typeof userData.password !== 'string') {
-            throw new Error('Backend user record does not support password verification')
-        }
-
-        if (userData.password !== password) {
-            throw new Error('Invalid email or password')
-        }
-
-        persistSession(userData)
+        const loginResponse = await loginUser(email, password);
+        localStorage.setItem('access_token', loginResponse.access_token);
+        localStorage.setItem('user_email', email);
+        setIsAuthenticated(true);
     }
 
     const register = async (name: string, email: string, password: string) => {
-        const existingUser = await getUserByEmail(email)
-        if (existingUser) {
-            throw new Error('An account with this email already exists')
-        }
-
-        const userData = await registerUser({ name, email, password })
-        persistSession(userData)
+        await registerUser({ name, email, password });
+        await login(email, password);
     }
 
     const resetPassword = async (email: string, password: string) => {
-        const existingUser = await getUserByEmail(email)
-        if (!existingUser || typeof existingUser.id !== 'number') {
-            throw new Error('User not found')
-        }
-
-        const updatedUser = await updateUser(existingUser.id, {
-            name: existingUser.name,
-            email: existingUser.email,
-            role: existingUser.role,
-            password
-        })
-
-        persistSession(updatedUser)
+        await login(email, password);
     }
 
-    const logout = () => {
-        setUser(null)
-        setIsAuthenticated(false)
-        localStorage.removeItem('user')
+    const logout = async () => {
+        try {
+            // Call the backend logout API which is stateless
+            await logoutUser()
+        } catch (error) {
+            // If the logout API call fails, we still want to clear the local session
+            console.error('Backend logout failed:', error)
+        } finally {
+            // Clear the local session
+            setUser(null)
+            setIsAuthenticated(false)
+            localStorage.removeItem('user_email')
+            localStorage.removeItem('access_token')
+        }
     }
 
     return (

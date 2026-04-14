@@ -57,30 +57,37 @@ const CLIENT_IP_CACHE_KEY = 'client-ip-cache'
 const VISIT_TRACKING_CACHE_KEY = 'visit-tracking-cache'
 const DOWNLOAD_TRACKING_CACHE_KEY = 'download-tracking-cache'
 
-async function requestJson<T>(path: string, init?: RequestInit): Promise<T> {
-    const response = await fetch(`${API_BASE_URL}${path}`, init)
+async function requestAPIJson<T>(path: string, init?: RequestInit): Promise<T> {
+
+    const token = typeof window !== 'undefined' ? localStorage.getItem('access_token') : null;
+    const headers = token ? { Authorization: `Bearer ${token}`, ...init?.headers } : init?.headers;
+
+    const response = await fetch(`${API_BASE_URL}${path}`, {
+        ...init,
+        headers
+    });
 
     if (!response.ok) {
-        let detail = ''
+        let detail = '';
 
         try {
-            const errorData = await response.json()
-            detail = errorData?.detail || errorData?.message || ''
+            const errorData = await response.json();
+            detail = errorData?.detail || errorData?.message || '';
         } catch {
-            detail = ''
+            detail = '';
         }
 
-        throw new Error(detail ? `${detail} (HTTP ${response.status})` : `Request failed with status ${response.status}`)
+        throw new Error(detail ? `${detail} (HTTP ${response.status})` : `Request failed with status ${response.status}`);
     }
 
     if (response.status === 204) {
-        return null as T
+        return null as T;
     }
 
-    return response.json()
+    return response.json();
 }
 
-function withJsonBody(body: unknown, init?: RequestInit): RequestInit {
+function requestAPIJsonWithBody(body: unknown, init?: RequestInit): RequestInit {
     return {
         ...init,
         headers: {
@@ -209,7 +216,7 @@ export function getDeviceInfo() {
 // ===== PROJECTS =====
 export async function fetchProjects() {
     try {
-        return await requestJson<any[]>('/projects/')
+        return await requestAPIJson<any[]>('/projects/')
     } catch (error) {
         console.error('Error fetching projects:', error)
         return []
@@ -217,29 +224,29 @@ export async function fetchProjects() {
 }
 
 export async function fetchProjectById(projectId: string | number) {
-    return requestJson<any>(`/projects/${projectId}`)
+    return requestAPIJson<any>(`/projects/${projectId}`)
 }
 
 export async function createProject(projectData: ProjectPayload) {
-    return requestJson<any>('/projects/', withJsonBody(projectData, { method: 'POST' }))
+    return requestAPIJson<any>('/projects/', requestAPIJsonWithBody(projectData, { method: 'POST' }))
 }
 
 export async function updateProject(projectId: number, projectData: ProjectPayload) {
-    return requestJson<any>(`/projects/${projectId}`, withJsonBody(projectData, { method: 'PUT' }))
+    return requestAPIJson<any>(`/projects/${projectId}`, requestAPIJsonWithBody(projectData, { method: 'PUT' }))
 }
 
 export async function deleteProject(projectId: number) {
-    return requestJson<any>(`/projects/${projectId}`, { method: 'DELETE' })
+    return requestAPIJson<any>(`/projects/${projectId}`, { method: 'DELETE' })
 }
 
 // ===== MESSAGES =====
 export async function sendMessage(messageData: MessagePayload) {
-    return requestJson<any>('/messages/', withJsonBody(messageData, { method: 'POST' }))
+    return requestAPIJson<any>('/messages/', requestAPIJsonWithBody(messageData, { method: 'POST' }))
 }
 
 export async function fetchMessages() {
     try {
-        return await requestJson<any[]>('/messages/')
+        return await requestAPIJson<any[]>('/messages/')
     } catch (error) {
         console.error('Error fetching messages:', error)
         return []
@@ -247,13 +254,13 @@ export async function fetchMessages() {
 }
 
 export async function deleteMessage(messageId: number) {
-    return requestJson<any>(`/messages/${messageId}`, { method: 'DELETE' })
+    return requestAPIJson<any>(`/messages/${messageId}`, { method: 'DELETE' })
 }
 
 // ===== VISITS =====
 export async function fetchVisits() {
     try {
-        return await requestJson<any[]>('/visits/')
+        return await requestAPIJson<any[]>('/visits/')
     } catch (error) {
         console.error('Error fetching visits:', error)
         return []
@@ -261,7 +268,7 @@ export async function fetchVisits() {
 }
 
 export async function deleteVisit(visitId: number) {
-    return requestJson<any>(`/visits/${visitId}`, { method: 'DELETE' })
+    return requestAPIJson<any>(`/visits/${visitId}`, { method: 'DELETE' })
 }
 
 const VISIT_TRACKING_TIMEOUT_MS = 10_000
@@ -274,7 +281,7 @@ export async function trackVisit(visitData: VisitPayload) {
             const controller = new AbortController()
             const timeoutId = setTimeout(() => controller.abort(), VISIT_TRACKING_TIMEOUT_MS)
 
-            const response = await fetch(`${API_BASE_URL}/visits/`, withJsonBody(visitData, {
+            const response = await fetch(`${API_BASE_URL}/visits/`, requestAPIJsonWithBody(visitData, {
                 method: 'POST',
                 signal: controller.signal
             }))
@@ -316,7 +323,7 @@ export async function trackDownload(downloadData: DownloadPayload) {
             const controller = new AbortController()
             const timeoutId = setTimeout(() => controller.abort(), timeout)
 
-            const response = await fetch(`${API_BASE_URL}/downloads/`, withJsonBody(downloadData, {
+            const response = await fetch(`${API_BASE_URL}/downloads/`, requestAPIJsonWithBody(downloadData, {
                 method: 'POST',
                 signal: controller.signal
             }))
@@ -351,7 +358,7 @@ export async function trackDownload(downloadData: DownloadPayload) {
 
 export async function fetchDownloads() {
     try {
-        return await requestJson<any[]>('/downloads/')
+        return await requestAPIJson<any[]>('/downloads/')
     } catch (error) {
         console.error('Error fetching downloads:', error)
         return []
@@ -359,17 +366,17 @@ export async function fetchDownloads() {
 }
 
 export async function deleteDownload(downloadId: number) {
-    return requestJson<any>(`/downloads/${downloadId}`, { method: 'DELETE' })
+    return requestAPIJson<any>(`/downloads/${downloadId}`, { method: 'DELETE' })
 }
 
 // ===== USERS & AUTH =====
 export async function registerUser(userData: UserPayload) {
-    return requestJson<any>('/users/', withJsonBody(userData, { method: 'POST' }))
+    return requestAPIJson<any>('/users/register', requestAPIJsonWithBody(userData, { method: 'POST' }))
 }
 
 export async function fetchUsers() {
     try {
-        return await requestJson<any[]>('/users/')
+        return await requestAPIJson<any[]>('/users/')
     } catch (error) {
         console.error('Error fetching users:', error)
         return []
@@ -378,7 +385,8 @@ export async function fetchUsers() {
 
 export async function getUserByEmail(email: string) {
     try {
-        return await requestJson<UserRecord>(`/users/email/${email}`)
+        console.log(`Fetching user by email: ${email}`)
+        return await requestAPIJson<UserRecord>(`/users/email/${email}`)
     } catch (error: any) {
         if (String(error?.message || '').toLowerCase().includes('404')) {
             return null
@@ -390,5 +398,26 @@ export async function getUserByEmail(email: string) {
 }
 
 export async function updateUser(userId: number, userData: UserPayload) {
-    return requestJson<UserRecord>(`/users/${userId}`, withJsonBody(userData, { method: 'PUT' }))
+    return requestAPIJson<UserRecord>(`/users/${userId}`, requestAPIJsonWithBody(userData, { method: 'PUT' }))
+}
+
+export async function logoutUser() {
+    try {
+        // Attempt to call the stateless backend logout API
+        await requestAPIJson<void>('/users/logout', { method: 'POST' })
+    } catch (error) {
+        console.error('Logout request failed:', error)
+        throw error
+    }
+}
+
+
+
+export interface LoginResponse {
+    access_token: string;
+    token_type: string;
+}
+
+export async function loginUser(email: string, password: string) {
+    return requestAPIJson<LoginResponse>('/users/login', requestAPIJsonWithBody({ email, password }, { method: 'POST' }));
 }
