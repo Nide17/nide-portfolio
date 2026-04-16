@@ -39,27 +39,24 @@ export default function Header() {
                         </Link>
                     </div>
                     <div className="flex items-center space-x-8">
-                        <button
-                            onClick={() => scrollToSection('home')}
-                            className={`font-bold bg-linear-to-r from-blue-600 to-sky-400 bg-clip-text text-transparent hover:from-blue-700 hover:to-sky-500 transition-all duration-300 font-['Poppins',system-ui,sans-serif] ${isScrolled ? 'text-lg' : 'text-xl'
-                                }`}
-                        >
-                            Home
-                        </button>
-                        <button
-                            onClick={() => scrollToSection('about')}
-                            className={`font-bold bg-linear-to-r from-blue-600 to-sky-400 bg-clip-text text-transparent hover:from-blue-700 hover:to-sky-500 transition-all duration-300 font-['Poppins',system-ui,sans-serif] ${isScrolled ? 'text-lg' : 'text-xl'
-                                }`}
-                        >
-                            About
-                        </button>
-                        <button
-                            onClick={() => scrollToSection('projects')}
-                            className={`font-bold bg-linear-to-r from-blue-600 to-sky-400 bg-clip-text text-transparent hover:from-blue-700 hover:to-sky-500 transition-all duration-300 font-['Poppins',system-ui,sans-serif] ${isScrolled ? 'text-lg' : 'text-xl'
-                                }`}
-                        >
-                            Projects
-                        </button>
+                        <Link href="/#home">
+                            <span className={`font-bold bg-linear-to-r from-blue-600 to-sky-400 bg-clip-text text-transparent hover:from-blue-700 hover:to-sky-500 transition-all duration-300 font-['Poppins',system-ui,sans-serif] cursor-pointer ${isScrolled ? 'text-lg' : 'text-xl'
+                                }`}>
+                                Home
+                            </span>
+                        </Link>
+                        <Link href="/#about">
+                            <span className={`font-bold bg-linear-to-r from-blue-600 to-sky-400 bg-clip-text text-transparent hover:from-blue-700 hover:to-sky-500 transition-all duration-300 font-['Poppins',system-ui,sans-serif] cursor-pointer ${isScrolled ? 'text-lg' : 'text-xl'
+                                }`}>
+                                About
+                            </span>
+                        </Link>
+                        <Link href="/#projects">
+                            <span className={`font-bold bg-linear-to-r from-blue-600 to-sky-400 bg-clip-text text-transparent hover:from-blue-700 hover:to-sky-500 transition-all duration-300 font-['Poppins',system-ui,sans-serif] cursor-pointer ${isScrolled ? 'text-lg' : 'text-xl'
+                                }`}>
+                                Projects
+                            </span>
+                        </Link>
                         <button
                             onClick={() => scrollToSection('contact')}
                             className={`font-bold bg-linear-to-r from-blue-600 to-sky-400 bg-clip-text text-transparent hover:from-blue-700 hover:to-sky-500 transition-all duration-300 font-['Poppins',system-ui,sans-serif] ${isScrolled ? 'text-lg' : 'text-xl'

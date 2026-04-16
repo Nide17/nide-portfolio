@@ -63,7 +63,8 @@ const emptyProjectForm: Project = {
     title: '',
     description: '',
     image: '',
-    github: '',
+    github_backend: '',
+    github_frontend: '',
     live_at: '',
     technologies: []
 }
@@ -218,7 +219,8 @@ export default function Dashboard() {
             [
                 project.title,
                 project.description,
-                project.github,
+                project.github_backend,
+                project.github_frontend,
                 project.live_at,
                 ...(project.technologies || [])
             ]
@@ -335,7 +337,8 @@ export default function Dashboard() {
             title: project.title || '',
             description: project.description || '',
             image: project.image || '',
-            github: project.github || '',
+            github_backend: project.github_backend || '',
+            github_frontend: project.github_frontend || '',
             live_at: project.live_at || '',
             technologies: project.technologies || []
         })
@@ -457,7 +460,7 @@ export default function Dashboard() {
                     </div>
 
                     <div className="space-y-3">
-                        <div className="grid grid-cols-2 gap-3 sm:flex">
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                             <StatCard label="Projects" value={projects.length} />
                             <StatCard label="Messages" value={messages.length} />
                             <StatCard label="Visits" value={visits.length} />
@@ -565,7 +568,7 @@ export default function Dashboard() {
                                             </h3>
                                         </div>
 
-                                        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                             <Field label="Title *">
                                                 <input
                                                     type="text"
@@ -597,11 +600,19 @@ export default function Dashboard() {
                                         </div>
 
                                         <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
-                                            <Field label="GitHub URL">
+                                            <Field label="GitHub Frontend">
                                                 <input
                                                     type="url"
-                                                    value={projectForm.github}
-                                                    onChange={(event) => setProjectForm({ ...projectForm, github: event.target.value })}
+                                                    value={projectForm.github_frontend || ''}
+                                                    onChange={(event) => setProjectForm({ ...projectForm, github_frontend: event.target.value })}
+                                                    className={inputClassName}
+                                                />
+                                            </Field>
+                                            <Field label="GitHub Backend">
+                                                <input
+                                                    type="url"
+                                                    value={projectForm.github_backend || ''}
+                                                    onChange={(event) => setProjectForm({ ...projectForm, github_backend: event.target.value })}
                                                     className={inputClassName}
                                                 />
                                             </Field>
@@ -719,14 +730,24 @@ export default function Dashboard() {
                                                                 )}
 
                                                                 <div className="mt-4 flex flex-wrap gap-4 text-sm">
-                                                                    {project.github && (
+                                                                    {project.github_backend && (
                                                                         <a
-                                                                            href={project.github}
+                                                                            href={project.github_backend}
                                                                             target="_blank"
                                                                             rel="noreferrer"
                                                                             className="break-all text-blue-600 hover:text-blue-800"
                                                                         >
-                                                                            GitHub
+                                                                            GitHub Backend
+                                                                        </a>
+                                                                    )}
+                                                                    {project.github_frontend && (
+                                                                        <a
+                                                                            href={project.github_frontend}
+                                                                            target="_blank"
+                                                                            rel="noreferrer"
+                                                                            className="break-all text-blue-600 hover:text-blue-800"
+                                                                        >
+                                                                            GitHub Frontend
                                                                         </a>
                                                                     )}
                                                                     {project.live_at && (

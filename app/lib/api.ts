@@ -5,7 +5,8 @@ export interface ProjectPayload {
     title: string
     description?: string
     image?: string
-    github?: string
+    github_backend?: string
+    github_frontend?: string
     live_at?: string
     technologies?: string[]
 }
