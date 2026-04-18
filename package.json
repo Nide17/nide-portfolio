@@ -8,6 +8,9 @@
     "lint": "eslint .",
     "docker": "docker build -t nide-portfolio ."
   },
+  "engines": {
+    "node": "24.x"
+  },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.5",
     "@types/node": "^25.5.2",
