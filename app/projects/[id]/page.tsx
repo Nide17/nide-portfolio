@@ -4,7 +4,7 @@ import { ProjectState } from './components/ProjectState'
 import { buildProjectMetadata, getProject } from './project-service'
 import type { ProjectFetchResult } from './types'
 
-export const maxDuration = 120
+export const maxDuration = 60
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
     const { id } = await params

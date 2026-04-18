@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { API_BASE_URL, SITE_URL } from '../../config'
 import type { ProjectFetchResult } from './types'
 
-const PROJECT_FETCH_TIMEOUT_MS = 12_000
+const PROJECT_FETCH_TIMEOUT_MS = 10_000
 const PROJECT_FETCH_RETRY_DELAY_MS = 750
 
 export async function getProject(id: string, retries = 1): Promise<ProjectFetchResult> {
