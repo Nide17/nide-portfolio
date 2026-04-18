@@ -22,6 +22,7 @@ import { DownloadsTab } from './components/DownloadsTab'
 import { MessagesTab } from './components/MessagesTab'
 import { ProjectsTab } from './components/ProjectsTab'
 import { VisitsTab } from './components/VisitsTab'
+import { Unauthorized } from './components/Unauthorized'
 import type { Download, Message, Project, ProjectFormState, TabKey, Visit } from './types'
 
 export default function Dashboard() {
@@ -361,10 +362,6 @@ export default function Dashboard() {
     const currentLoading = loading[activeTab]
     const currentRefreshing = refreshing[activeTab]
 
-    if (!isReady || !isAuthenticated) {
-        return <div className="min-h-screen bg-slate-50 pt-32 text-center">Loading...</div>
-    }
-
     const handleRefresh = () => {
         if (activeTab === 'projects') void loadProjects(true)
         if (activeTab === 'messages') void loadMessages(true)
@@ -375,6 +372,11 @@ export default function Dashboard() {
     const handleLogout = () => {
         logout()
         router.replace('/login')
+    }
+
+    console.log('User role:', user?.role)
+    if (user?.role !== 'admin') {
+        return <Unauthorized />
     }
 
     return (
