@@ -1,17 +1,23 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import { API_BASE_URL } from '../../config'
+import { API_BASE_URL, SITE_URL } from '../../config'
 
 export const maxDuration = 120
 
-const PROJECT_FETCH_TIMEOUT_MS = 115_000
+const PROJECT_FETCH_TIMEOUT_MS = 12_000
+const PROJECT_FETCH_RETRY_DELAY_MS = 750
 
 type ProjectFetchResult =
     | { status: 'success'; project: any }
     | { status: 'not-found'; project: null }
     | { status: 'error'; project: null }
 
-async function getProject(id: string, retries = 2): Promise<ProjectFetchResult> {
+async function getProject(id: string, retries = 1): Promise<ProjectFetchResult> {
+    if (!API_BASE_URL) {
+        return { status: 'error', project: null }
+    }
+
     try {
         const controller = new AbortController()
         const timeoutId = setTimeout(() => controller.abort(), PROJECT_FETCH_TIMEOUT_MS)
@@ -36,12 +42,53 @@ async function getProject(id: string, retries = 2): Promise<ProjectFetchResult> 
         console.error(`Failed to fetch project (retries left: ${retries}):`, error)
 
         if (retries > 0) {
-            // Wait 2 seconds before retrying
-            await new Promise(resolve => setTimeout(resolve, 2000))
+            await new Promise(resolve => setTimeout(resolve, PROJECT_FETCH_RETRY_DELAY_MS))
             return getProject(id, retries - 1)
         }
 
         return { status: 'error', project: null }
+    }
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+    const { id } = await params
+    const result = await getProject(id, 0)
+
+    if (result.status !== 'success') {
+        return {
+            title: 'Project',
+            robots: {
+                index: false,
+                follow: true,
+            },
+        }
+    }
+
+    const { project } = result
+    const description =
+        project.description?.slice(0, 160) ||
+        'Project case study from the portfolio of Niyomwungeri Parmenide Ishimwe.'
+    const canonicalPath = `/projects/${id}`
+
+    return {
+        title: project.title,
+        description,
+        alternates: {
+            canonical: canonicalPath,
+        },
+        openGraph: {
+            title: project.title,
+            description,
+            url: SITE_URL ? `${SITE_URL}${canonicalPath}` : undefined,
+            type: 'article',
+            images: project.image ? [{ url: project.image, alt: project.title }] : undefined,
+        },
+        twitter: {
+            card: project.image ? 'summary_large_image' : 'summary',
+            title: project.title,
+            description,
+            images: project.image ? [project.image] : undefined,
+        },
     }
 }
 

@@ -10,9 +10,6 @@ export default function Welcome() {
             try {
                 const ip = await getClientIP()
                 if (!shouldTrackVisit(ip)) {
-                    if (process.env.NODE_ENV !== 'production') {
-                        console.log('[tracking] Skipping visit tracking: cached within 24 hours for IP', ip)
-                    }
                     return
                 }
 

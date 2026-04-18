@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { fetchProjects } from '../lib/api'
 
 interface Project {
@@ -19,6 +20,11 @@ interface Project {
 export default function Projects() {
     const [projects, setProjects] = useState<Project[]>([])
     const [loading, setLoading] = useState(true)
+    const router = useRouter()
+
+    const openProject = (projectId: number) => {
+        router.push(`/projects/${projectId}`)
+    }
 
     useEffect(() => {
         const loadProjects = async () => {
@@ -58,7 +64,7 @@ export default function Projects() {
                                 <div className="flex flex-col bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-200 hover:border-blue-200 transform hover:-translate-y-2"
                                 >
                                     {project.image && (
-                                        <div className="relative overflow-hidden cursor-pointer" onClick={() => window.location.replace(`/projects/${project.id}`)}>
+                                        <div className="relative overflow-hidden cursor-pointer" onClick={() => openProject(project.id)}>
                                             <Image
                                                 src={project.image}
                                                 alt={project.title}
@@ -75,8 +81,8 @@ export default function Projects() {
                                             </div>
                                         </div>
                                     )}
-                                    <div className="p-6">
-                                        <div className="space-y-3" onClick={() => window.location.replace(`/projects/${project.id}`)}>
+                                        <div className="p-6">
+                                            <div className="space-y-3" onClick={() => openProject(project.id)}>
                                             <h3 className="flex h-24 items-center justify-center text-center line-clamp-4 text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors leading-tight">
                                                 {project.title}
                                             </h3>

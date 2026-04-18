@@ -15,9 +15,6 @@ export default function About() {
         try {
             const ip = await getClientIP()
             if (!shouldTrackDownload(ip)) {
-                if (process.env.NODE_ENV !== 'production') {
-                    console.log('[tracking] Skipping CV download tracking: cached within 24 hours for IP', ip)
-                }
                 return
             }
 

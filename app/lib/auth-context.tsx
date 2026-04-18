@@ -26,31 +26,64 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [isReady, setIsReady] = useState(false)
 
-    // Load token on mount
     useEffect(() => {
-        const token = localStorage.getItem('access_token')
-        if (token) {
-            setIsAuthenticated(true)
+        let isMounted = true
+
+        const bootstrapAuth = async () => {
+            const token = localStorage.getItem('access_token')
+            if (!token) {
+                if (isMounted) {
+                    setUser(null)
+                    setIsAuthenticated(false)
+                    setIsReady(true)
+                }
+                return
+            }
+
+            try {
+                const currentUser = await getCurrentUser()
+                if (!isMounted) return
+
+                setUser(currentUser)
+                setIsAuthenticated(true)
+            } catch {
+                localStorage.removeItem('user_email')
+                localStorage.removeItem('access_token')
+
+                if (!isMounted) return
+
+                setUser(null)
+                setIsAuthenticated(false)
+            } finally {
+                if (isMounted) {
+                    setIsReady(true)
+                }
+            }
         }
-        setIsReady(true)
+
+        void bootstrapAuth()
+
+        return () => {
+            isMounted = false
+        }
     }, [])
 
     const login = async (email: string, password: string) => {
-        const loginResponse = await loginUser(email, password);
-        localStorage.setItem('access_token', loginResponse.access_token);
-        localStorage.setItem('user_email', email);
-        const currentUserData = await getCurrentUser();
-        setUser(currentUserData);
-        setIsAuthenticated(true);
+        const loginResponse = await loginUser(email, password)
+        localStorage.setItem('access_token', loginResponse.access_token)
+        localStorage.setItem('user_email', email)
+        const currentUserData = await getCurrentUser()
+        setUser(currentUserData)
+        setIsAuthenticated(true)
     }
 
     const register = async (name: string, email: string, password: string) => {
-        await registerUser({ name, email, password });
-        await login(email, password);
+        await registerUser({ name, email, password })
+        await login(email, password)
     }
 
     const resetPassword = async (email: string, password: string) => {
-        await login(email, password);
+        await login(email, password)
     }
 
     const logout = async () => {
@@ -59,9 +92,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             await logoutUser()
         } catch (error) {
             // If the logout API call fails, we still want to clear the local session
-            console.error('Backend logout failed:', error)
         } finally {
-            // Clear the local session
             setUser(null)
             setIsAuthenticated(false)
             localStorage.removeItem('user_email')

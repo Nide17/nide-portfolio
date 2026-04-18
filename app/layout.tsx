@@ -1,15 +1,48 @@
 import type { Metadata, Viewport } from 'next'
 import './styles/globals.css'
 import TitleAnimator from './components/TitleAnimator'
+import { SITE_URL } from './config'
 
 // THE HEADER NAVIGATION
 import Header from './components/Header'
 import { Providers } from './providers'
 
+const metadataBase = SITE_URL ? new URL(SITE_URL) : undefined
+const portfolioTitle = 'Niyomwungeri Parmenide Ishimwe | Software Engineer'
+const portfolioDescription =
+  'Portfolio of Niyomwungeri Parmenide Ishimwe, a full-stack software engineer building modern web applications and performance-focused systems.'
+
 export const metadata: Metadata = {
-  title: 'Niyomwungeri Parmenide Ishimwe - Portfolio',
-  description: 'Full-Stack Software Engineer specializing in modern web technologies. Explore my projects and experience.',
-  robots: 'index, follow',
+  metadataBase,
+  title: {
+    default: portfolioTitle,
+    template: '%s | Niyomwungeri Parmenide Ishimwe',
+  },
+  description: portfolioDescription,
+  applicationName: 'Parmenide Portfolio',
+  alternates: {
+    canonical: '/',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+  },
+  openGraph: {
+    type: 'website',
+    url: SITE_URL || undefined,
+    title: portfolioTitle,
+    description: portfolioDescription,
+    siteName: 'Parmenide Portfolio',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: portfolioTitle,
+    description: portfolioDescription,
+  },
 }
 
 export const viewport: Viewport = {

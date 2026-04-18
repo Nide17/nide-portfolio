@@ -59,6 +59,9 @@ const VISIT_TRACKING_CACHE_KEY = 'visit-tracking-cache'
 const DOWNLOAD_TRACKING_CACHE_KEY = 'download-tracking-cache'
 
 async function requestAPIJson<T>(path: string, init?: RequestInit): Promise<T> {
+    if (!API_BASE_URL) {
+        throw new Error('NEXT_PUBLIC_API_BASE_URL is not configured')
+    }
 
     const token = typeof window !== 'undefined' ? localStorage.getItem('access_token') : null;
     const headers = token ? { Authorization: `Bearer ${token}`, ...init?.headers } : init?.headers;
@@ -275,6 +278,8 @@ export async function deleteVisit(visitId: number) {
 const VISIT_TRACKING_TIMEOUT_MS = 10_000
 
 export async function trackVisit(visitData: VisitPayload) {
+    if (!API_BASE_URL) return null
+
     const maxRetries = 3
 
     for (let attempt = 0; attempt <= maxRetries; attempt++) {
@@ -316,6 +321,8 @@ export async function trackVisit(visitData: VisitPayload) {
 
 // ===== DOWNLOADS =====
 export async function trackDownload(downloadData: DownloadPayload) {
+    if (!API_BASE_URL) return null
+
     const maxRetries = 3
     const timeout = 10_000
 
@@ -386,7 +393,6 @@ export async function fetchUsers() {
 
 export async function getUserByEmail(email: string) {
     try {
-        console.log(`Fetching user by email: ${email}`)
         return await requestAPIJson<UserRecord>(`/users/email/${email}`)
     } catch (error: any) {
         if (String(error?.message || '').toLowerCase().includes('404')) {
