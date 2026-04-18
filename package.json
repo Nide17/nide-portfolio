@@ -5,10 +5,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
-  },
-  "engines": {
-    "node": "18.x"
+    "lint": "eslint .",
+    "docker": "docker build -t nide-portfolio ."
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.5",
@@ -25,27 +23,12 @@
   "dependencies": {
     "@tailwindcss/postcss": "^4.2.2",
     "classnames": "^2.3.2",
-    "next": "16.2.2",
+    "next": "^16.2.4",
     "react": "19.2.4",
-    "react-collapse": "^5.1.1",
-    "react-dom": "19.2.4",
-    "react-tabs": "^6.1.1",
-    "react-type-animation": "^3.1.0"
+    "react-dom": "19.2.4"
   },
   "overrides": {
     "react": "19.2.4",
-    "react-dom": "19.2.4",
-    "react-collapse": {
-      "react": "19.2.4",
-      "react-dom": "19.2.4"
-    },
-    "react-tabs": {
-      "react": "19.2.4",
-      "react-dom": "19.2.4"
-    },
-    "react-type-animation": {
-      "react": "19.2.4",
-      "react-dom": "19.2.4"
-    }
+    "react-dom": "19.2.4"
   }
 }

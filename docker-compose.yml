@@ -1,21 +1,12 @@
-version: '3' #This denotes that we are using version 3 of Docker Compose
 services:
-  #This section defines all the different containers we will create.
-
   nide-portfolio:
-    #This is the name of our Nextjs application.
-
-    ports:
-      #This is used to map the container’s ports to the host machine.
-      - "3000:3000"
     build:
-      #This specifies the location of our Dockerfile
-      context: /
+      context: .
       dockerfile: Dockerfile
-    volumes:
-      - ./:/app
-      - /app/node_modules
-      - /app/.next
-
-    # env_file:
-    #   - .env
+    ports:
+      - "3001:3001"
+    restart: unless-stopped
+    env_file:
+      - .env.docker
+    extra_hosts:
+      - "host.docker.internal:host-gateway"  # Linux only
