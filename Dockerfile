@@ -1,21 +1,26 @@
-FROM node:alpine
+# Using official Node.js image as the base image
+FROM node:20-alpine AS builder
 
-ENV PORT 3000
-
+# Set the working directory inside the container
 WORKDIR /app
 
-# install dependencies
+# Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
-RUN npm install
 
-# Copy source files
-COPY . ./
+# Install dependencies: using npm ci for clean install based on package-lock.json
+RUN npm ci
 
-# Build the app
+# Copy the rest of the application code to the working directory
+COPY . .
+
+# Build the Next.js application
 RUN npm run build
 
-# The port that this container will listen to
-EXPOSE 3000
+# Set environment variables for the application
+ENV NODE_ENV=production PORT=3001 HOSTNAME="0.0.0.0"
 
-# Running the app
-CMD [ "npm", "run", "dev" ]
+# Expose the port on which the application will run
+EXPOSE 3001
+
+# Start the application
+CMD ["node_modules/.bin/next", "start"]
