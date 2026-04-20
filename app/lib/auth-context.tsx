@@ -1,6 +1,6 @@
 "use client"
 import React, { createContext, useContext, useState, useEffect } from 'react'
-import { registerUser, logoutUser, loginUser, getCurrentUser } from './api'
+import { registerUser, logoutUser, loginUser, getCurrentUser, forgotPassword, resetPassword } from './api'
 
 interface User {
     id?: number
@@ -9,13 +9,19 @@ interface User {
     role?: string
 }
 
+interface ResetPasswordPayload {
+    token: string;
+    password: string;
+}
+
 interface AuthContextType {
     user: User | null
     isAuthenticated: boolean
     isReady: boolean
     login: (email: string, password: string) => Promise<void>
     register: (name: string, email: string, password: string) => Promise<void>
-    resetPassword: (email: string, password: string) => Promise<void>
+    forgotPassword: (email: string) => Promise<void>
+    resetPassword: (token: string, password: string) => Promise<void>
     logout: () => void
 }
 
@@ -82,8 +88,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         await login(email, password)
     }
 
-    const resetPassword = async (email: string, password: string) => {
-        await login(email, password)
+    const forgotPassword = async (email: string) => {
+        const { forgotPassword: apiForgot } = await import('./api')
+        await apiForgot(email)
+    }
+
+    const resetPassword = async (token: string, password: string) => {
+        const { resetPassword: apiReset } = await import('./api')
+        await apiReset({ token, password })
     }
 
     const logout = async () => {
@@ -101,7 +113,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
 
     return (
-        <AuthContext.Provider value={{ user, isAuthenticated, isReady, login, register, resetPassword, logout }}>
+        <AuthContext.Provider value={{ user, isAuthenticated, isReady, login, register, forgotPassword, resetPassword, logout }}>
             {children}
         </AuthContext.Provider>
     )

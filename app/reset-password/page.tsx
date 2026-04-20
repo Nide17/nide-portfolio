@@ -1,17 +1,18 @@
 "use client"
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useAuth } from '../lib/auth-context'
 
-export default function ResetPasswordPage() {
+function ResetPasswordContent() {
     const { resetPassword, isAuthenticated, isReady } = useAuth()
     const router = useRouter()
-    const [email, setEmail] = useState('')
+    const searchParams = useSearchParams()
+    const token = searchParams.get('token') || ''
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
-    const [error, setError] = useState('')
+    const [error, setError] = useState(token ? '' : 'No reset token provided. Please use the link from your email.')
     const [success, setSuccess] = useState('')
     const [loading, setLoading] = useState(false)
 
@@ -21,7 +22,7 @@ export default function ResetPasswordPage() {
         }
     }, [isAuthenticated, isReady, router])
 
-    const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         setError('')
         setSuccess('')
@@ -36,14 +37,19 @@ export default function ResetPasswordPage() {
             return
         }
 
+        if (!token) {
+            setError('No reset token. Please use the link from your email.')
+            return
+        }
+
         setLoading(true)
 
         try {
-            await resetPassword(email, password)
-            setSuccess('Password updated successfully. Redirecting to dashboard...')
-            router.push('/dashboard')
+            await resetPassword(token, password)
+            setSuccess('Password updated successfully. Redirecting to login...')
+            setTimeout(() => router.push('/login'), 2000)
         } catch (submitError: any) {
-            setError(submitError.message || 'Failed to reset password')
+            setError(submitError.message || 'Failed to reset password. Token may be invalid or expired.')
         } finally {
             setLoading(false)
         }
@@ -70,20 +76,6 @@ export default function ResetPasswordPage() {
                 )}
 
                 <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Email
-                        </label>
-                        <input
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                            placeholder="you@example.com"
-                        />
-                    </div>
-
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">
                             New Password
@@ -128,5 +120,13 @@ export default function ResetPasswordPage() {
                 </div>
             </div>
         </div>
+    )
+}
+
+export default function ResetPasswordPage() {
+    return (
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-gray-50 pt-32 text-center">Loading reset form...</div>}>
+            <ResetPasswordContent />
+        </Suspense>
     )
 }

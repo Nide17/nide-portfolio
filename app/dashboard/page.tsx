@@ -131,6 +131,7 @@ export default function Dashboard() {
             return
         }
 
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         void Promise.all([loadProjects(), loadMessages(), loadVisits(), loadDownloads()])
     }, [isAuthenticated, isReady, loadDownloads, loadMessages, loadProjects, loadVisits, router])
 
@@ -374,7 +375,6 @@ export default function Dashboard() {
         router.replace('/login')
     }
 
-    console.log('User role:', user?.role)
     if (user?.role !== 'admin') {
         return <Unauthorized />
     }
