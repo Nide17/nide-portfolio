@@ -432,3 +432,17 @@ export async function loginUser(email: string, password: string) {
 export async function getCurrentUser() {
     return requestAPIJson<UserRecord>('/users/me');
 }
+
+// ===== PASSWORD RESET =====
+export interface ResetPasswordPayload {
+    token: string;
+    password: string;
+}
+
+export async function forgotPassword(email: string) {
+    return requestAPIJson<void>('/users/forgot-password', requestAPIJsonWithBody({ email }, { method: 'POST' }));
+}
+
+export async function resetPassword(payload: ResetPasswordPayload) {
+    return requestAPIJson<void>('/users/reset-password', requestAPIJsonWithBody({ token: payload.token, new_password: payload.password }, { method: 'POST' }));
+}
