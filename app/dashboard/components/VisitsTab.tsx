@@ -30,7 +30,7 @@ export function VisitsTab({ currentLoading, deletingKey, visits, onDeleteVisit }
                             <p className="mt-1 text-sm text-slate-600">
                                 {[visit.device, visit.operating_system, visit.browser].filter(Boolean).join(' • ') || 'Unknown device'}
                             </p>
-                            {visit.country && <p className="mt-2 break-all text-xs text-slate-500">Path: {visit.country}</p>}
+                            {visit.country && <p className="mt-2 break-all text-xs text-slate-500">Country: {visit.country}</p>}
                             {visit.path && <p className="mt-2 break-all text-xs text-slate-500">Path: {visit.path}</p>}
                             {visit.referrer && <p className="mt-1 break-all text-xs text-slate-500">Referrer: {visit.referrer}</p>}
                             <p className="mt-2 text-xs text-slate-500">{new Date(visit.created_at).toLocaleString()}</p>

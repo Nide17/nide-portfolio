@@ -32,7 +32,7 @@ export function Unauthorized({ returnUrl = '/' }: UnauthorizedProps) {
                         </svg>
                     </div>
                     <h2 className="mt-4 text-2xl font-bold text-gray-900">Access Denied</h2>
-                    <p className="mt-2 text-gray-600">Administrator privileges required for dashboard.</p>
+                    <p className="mt-2 text-gray-600">Admin privileges required.</p>
                 </div>
                 <div className="grid grid-cols-1 gap-3">
                     <Link href="/login" className="w-full flex justify-center py-3 px-4 border border-gray-300 rounded-xl text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">

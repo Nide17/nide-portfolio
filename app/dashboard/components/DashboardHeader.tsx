@@ -26,12 +26,12 @@ export function DashboardHeader({
                         <p className="mt-2 text-2xl font-bold bg-linear-to-r from-blue-600 to-sky-400 bg-clip-text text-transparent">
                             Welcome back, {userName}!
                         </p>
-                        <p className="text-slate-600">Manage content and review activity.</p>
+                        <p className="text-slate-600">Manage content & activities.</p>
                     </>
                 ) : (
                     <>
-                        <p className="mt-2 text-slate-600">Welcome to your dashboard.</p>
-                        <p className="mt-1 text-sm text-slate-500">Manage content and review activity.</p>
+                        <p className="mt-2 text-slate-600">Welcome!.</p>
+                        <p className="mt-1 text-sm text-slate-500">Manage content & activities.</p>
                     </>
                 )}
             </div>
