@@ -14,17 +14,17 @@ function ResourceCard({ title, subtitle, href, accent = 'dark', icon }: Resource
     const content = (
         <>
             <div className="flex items-center gap-4">
-                <div className={href ? 'group-hover:scale-110 transition-transform' : 'opacity-50'}>{icon}</div>
+                <div className={href ? 'transition-transform group-hover:scale-110' : 'opacity-50'}>{icon}</div>
                 <div>
-                    <div className={href ? (accent === 'dark' ? 'font-semibold text-white hover:text-gray-200' : 'font-semibold') : 'font-semibold'}>
+                    <div className={href ? (accent === 'dark' ? 'text-sm font-semibold text-white sm:text-base' : 'text-sm font-semibold text-white sm:text-base') : 'text-sm font-semibold sm:text-base'}>
                         {title}
                     </div>
-                    <div className={href ? (accent === 'dark' ? 'text-sm text-gray-400' : 'text-sm text-white/80') : 'text-sm'}>
+                    <div className={href ? (accent === 'dark' ? 'text-xs text-white/70 sm:text-sm' : 'text-xs text-white/80 sm:text-sm') : 'text-xs text-gray-500 sm:text-sm'}>
                         {subtitle}
                     </div>
                 </div>
             </div>
-            <ChevronRightIcon className={`w-5 h-5 ${href ? 'group-hover:translate-x-1 transition-transform' : 'opacity-0'}`} />
+            <ChevronRightIcon className={`h-4 w-4 sm:h-5 sm:w-5 ${href ? 'transition-transform group-hover:translate-x-1' : 'opacity-0'}`} />
         </>
     )
 
@@ -36,8 +36,8 @@ function ResourceCard({ title, subtitle, href, accent = 'dark', icon }: Resource
                 rel="noopener noreferrer"
                 className={
                     accent === 'blue'
-                        ? 'flex items-center justify-between p-6 bg-linear-to-r from-blue-600 to-sky-500 text-white rounded-xl hover:shadow-xl transition-all duration-300 group'
-                        : 'flex items-center justify-between p-6 bg-gray-900 text-white rounded-xl hover:bg-gray-800 transition-all duration-300 group'
+                        ? 'group flex items-center justify-between rounded-3xl bg-linear-to-r from-blue-600 via-sky-500 to-cyan-500 p-5 text-white shadow-[0_18px_40px_-20px_rgba(2,132,199,0.75)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_-20px_rgba(2,132,199,0.85)] sm:p-6'
+                        : 'group flex items-center justify-between rounded-3xl bg-linear-to-r from-slate-800 to-slate-950 p-5 text-white shadow-[0_18px_40px_-20px_rgba(15,23,42,0.85)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_-20px_rgba(15,23,42,0.95)] sm:p-6'
                 }
             >
                 {content}
@@ -46,7 +46,7 @@ function ResourceCard({ title, subtitle, href, accent = 'dark', icon }: Resource
     }
 
     return (
-        <div className="flex items-center justify-between p-6 bg-gray-100 text-gray-400 rounded-xl border-2 border-dashed border-gray-300">
+        <div className="flex items-center justify-between rounded-3xl border border-dashed border-gray-300 bg-gray-100 p-5 text-gray-400 sm:p-6">
             {content}
         </div>
     )
@@ -59,14 +59,14 @@ interface ProjectResourcesProps {
 }
 
 export function ProjectResources({ githubBackend, githubFrontend, liveAt }: ProjectResourcesProps) {
-    const githubIcon = <GitHubIcon className="w-8 h-8" />
+    const githubIcon = <GitHubIcon className="h-7 w-7 sm:h-8 sm:w-8" />
 
-    const liveIcon = <ExternalLinkIcon className="w-8 h-8" />
+    const liveIcon = <ExternalLinkIcon className="h-7 w-7 sm:h-8 sm:w-8" />
 
     return (
         <div className="mb-12">
-            <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                <div className="w-1 h-6 bg-linear-to-b from-blue-600 to-sky-400 rounded-full" />
+            <h2 className="mb-5 flex items-center gap-2 text-lg font-bold text-gray-900 sm:mb-6 sm:text-xl">
+                <div className="h-5 w-1 rounded-full bg-linear-to-b from-blue-600 to-sky-400 sm:h-6" />
                 Resources
             </h2>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">

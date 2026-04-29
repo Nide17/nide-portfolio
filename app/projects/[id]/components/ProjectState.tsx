@@ -9,13 +9,13 @@ interface ProjectStateProps {
 
 export function ProjectState({ title, description, backHref, backLabel }: ProjectStateProps) {
     return (
-        <div className="min-h-screen bg-linear-to-br from-gray-50 to-blue-50 flex items-center justify-center pt-24">
-            <div className="text-center px-4">
-                <h1 className="text-4xl font-bold text-gray-900 mb-4">{title}</h1>
-                <p className="text-gray-600 mb-8">{description}</p>
+        <div className="flex min-h-screen items-center justify-center bg-linear-to-br from-blue-50 via-white to-sky-50 px-4 pt-24">
+            <div className="max-w-xl rounded-[2rem] border border-white/70 bg-white/90 px-6 py-10 text-center shadow-[0_28px_90px_-38px_rgba(14,116,144,0.35)] ring-1 ring-sky-100/70 sm:px-8 sm:py-12">
+                <h1 className="mb-4 text-3xl font-bold leading-tight text-gray-900 sm:text-4xl">{title}</h1>
+                <p className="mb-8 text-sm leading-7 text-gray-600 sm:text-base">{description}</p>
                 <Link
                     href={backHref}
-                    className="inline-block px-6 py-3 bg-linear-to-r from-blue-600 to-sky-400 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-sky-500 transition-all duration-300"
+                    className="inline-flex items-center justify-center rounded-full bg-linear-to-r from-blue-600 via-sky-500 to-cyan-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_18px_40px_-18px_rgba(2,132,199,0.75)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_22px_48px_-18px_rgba(2,132,199,0.85)] sm:text-base"
                 >
                     {backLabel}
                 </Link>

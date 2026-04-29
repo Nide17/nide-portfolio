@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
+import { useAuth } from '../../lib/auth-context'
+
 
 interface UnauthorizedProps {
     returnUrl?: string
@@ -8,14 +10,17 @@ interface UnauthorizedProps {
 
 export function Unauthorized({ returnUrl = '/' }: UnauthorizedProps) {
 
+    const { logout } = useAuth()
+
     const router = useRouter()
     // Auto-redirect after 5 seconds
     useEffect(() => {
         const timer = setTimeout(() => {
+            logout()
             router.push(returnUrl)
         }, 5000)
         return () => clearTimeout(timer)
-    }, [router, returnUrl])
+    }, [router, returnUrl, logout])
 
     return (
         <div className="min-h-screen bg-linear-to-br from-gray-50 to-blue-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">

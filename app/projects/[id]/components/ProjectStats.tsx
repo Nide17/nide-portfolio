@@ -10,24 +10,24 @@ export function ProjectStats({
     hasGithubFrontend,
 }: ProjectStatsProps) {
     return (
-        <div className="grid grid-cols-2 gap-4 pt-8 border-t-2 border-gray-200">
-            <div className="text-center p-4">
-                <div className="text-2xl sm:text-3xl font-bold bg-linear-to-r from-blue-600 to-sky-500 bg-clip-text text-transparent">
+        <div className="grid grid-cols-2 gap-3 border-t border-sky-100 pt-8 sm:gap-4">
+            <div className="rounded-2xl bg-sky-50/70 p-4 text-center sm:p-5">
+                <div className="bg-linear-to-r from-blue-600 to-sky-500 bg-clip-text text-xl font-bold text-transparent sm:text-3xl">
                     {technologiesCount}
                 </div>
-                <p className="text-sm text-gray-600 mt-2">Technologies</p>
+                <p className="mt-2 text-xs text-gray-600 sm:text-sm">Technologies</p>
             </div>
-            <div className="text-center p-4">
-                <div className="text-2xl sm:text-3xl font-bold bg-linear-to-r from-blue-600 to-sky-500 bg-clip-text text-transparent">
+            <div className="rounded-2xl bg-sky-50/70 p-4 text-center sm:p-5">
+                <div className="bg-linear-to-r from-blue-600 to-sky-500 bg-clip-text text-xl font-bold text-transparent sm:text-3xl">
                     {hasGithubBackend ? '✓' : '○'}
                 </div>
-                <p className="text-sm text-gray-600 mt-2">Frontend Code Available</p>
+                <p className="mt-2 text-xs text-gray-600 sm:text-sm">Backend Code Available</p>
             </div>
-            <div className="text-center p-4">
-                <div className="text-2xl sm:text-3xl font-bold bg-linear-to-r from-blue-600 to-sky-500 bg-clip-text text-transparent">
+            <div className="rounded-2xl bg-sky-50/70 p-4 text-center sm:p-5">
+                <div className="bg-linear-to-r from-blue-600 to-sky-500 bg-clip-text text-xl font-bold text-transparent sm:text-3xl">
                     {hasGithubFrontend ? '✓' : '○'}
                 </div>
-                <p className="text-sm text-gray-600 mt-2">Frontend Code Available</p>
+                <p className="mt-2 text-xs text-gray-600 sm:text-sm">Frontend Code Available</p>
             </div>
         </div>
     )
