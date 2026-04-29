@@ -1,15 +1,17 @@
 # Nide Portfolio
 
-A personal portfolio with **admin dashboard**, project management, and analytics. Built with Next.js App Router, React, TypeScript, and Tailwind CSS. Connects to external FastAPI backend.
+A personal portfolio with an admin dashboard, project management, and basic analytics. Built with Next.js App Router, React, TypeScript, and Tailwind CSS. Connects to an external FastAPI backend.
 
 ## Features
 
 - Responsive portfolio with few animations
 - Projects showcase with dynamic data loading
 - Admin dashboard with tabs (Projects, Messages, Visits, Downloads)
+- Auth flows (login, register, forgot/reset password)
 - Role-based access (admin only dashboard)
 - Contact form with backend integration
 - Activity tracking (visits/downloads)
+- Server-side IP country lookup route for tracking
 - Production-ready with Docker support
 - TypeScript + modern React patterns
 
@@ -25,8 +27,8 @@ A personal portfolio with **admin dashboard**, project management, and analytics
 ## Quick Start
 
 ### Prerequisites
-- Node.js 18+
-- Backend API URL (NEXT_PUBLIC_API_BASE_URL in .env)
+- Node.js 24.x
+- Backend API URL in `.env.local`
 
 ```bash
 # Clone & install
@@ -38,9 +40,6 @@ npm install
 touch .env.local
 # Add: NEXT_PUBLIC_API_BASE_URL=https://fastapi-backend-domain.com
 
-# Build
-npm run build
-
 # Dev server
 npm run dev
 ```
@@ -49,20 +48,23 @@ Open [http://localhost:3000](http://localhost:3000)
 
 ### Docker
 ```bash
-docker-compose up --build
+docker build -t nide-portfolio .
 ```
 
 ## Project Structure
 
 ```
 app/
-├── components/     # Portfolio sections (About, Projects, Contact)
-├── dashboard/      # Admin UI + logic
-│   ├── components/ # Dashboard tabs, toolbar
-│   ├── constants.ts
-│   └── types.ts
-├── lib/            # API helpers, auth context
-└── projects/       # Dynamic project pages
+├── api/              # Local server routes
+├── components/       # Portfolio sections and shared UI
+├── config/           # Frontend config
+├── dashboard/        # Admin UI
+├── forgot-password/  # Auth pages
+├── login/
+├── register/
+├── reset-password/
+├── lib/              # API helpers, icons, auth context
+└── projects/         # Dynamic project pages
 ```
 
 ## Environment Variables
@@ -80,15 +82,7 @@ NEXT_PUBLIC_API_BASE_URL=https://fastapi-backend-domain.com
 | `npm run build`  | Production build  |
 | `npm run start`  | Production server |
 | `npm run lint`   | Run ESLint        |
-| `npm run docker` | Build/run Docker  |
-
-## Development
-
-1. **Backend**: Run FastAPI backend locally or use production URL
-2. **Frontend**: `npm run dev`
-3. **Changes**: Edit in `app/`, test in browser
-4. **Lint**: `npm run lint`
-5. **Build**: `npm run build` (catches issues)
+| `npm run docker` | Build Docker image |
 
 ## Admin Access
 
@@ -105,27 +99,8 @@ Frontend calls external FastAPI:
 - `/messages` - Contact form submissions
 - `/visits`, `/downloads` - Analytics
 
-## Responsive Design
-
-- Mobile-first
-- Smooth scroll animations
-- Dark mode ready
-- Accessibility (ARIA labels)
-
-## Recent Updates
-
-- Icon system (`lib/icons.tsx`) - centralized SVGs
-- Admin role protection with Unauthorized component
-- Improved TypeScript types + ESLint
-- Docker production setup
-
-## Contributing
-
-1. Fork repository
-2. Create feature branch
-3. Run `npm run lint`
-4. Test changes
-5. PR to `main`
+Frontend also exposes a local route:
+- `/api/ip-country` - server-side country lookup for visit/download tracking
 
 ## License
 
