@@ -178,7 +178,7 @@ export default function Dashboard() {
         if (!value) return visits
 
         return visits.filter((visit) =>
-            [visit.ip_address, visit.device, visit.operating_system, visit.browser, visit.path, visit.referrer]
+            [visit.ip_address, visit.device, visit.operating_system, visit.country, visit.browser, visit.path, visit.referrer]
                 .filter(Boolean)
                 .join(' ')
                 .toLowerCase()

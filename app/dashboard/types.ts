@@ -15,6 +15,7 @@ export interface Visit {
     device?: string
     operating_system?: string
     browser?: string
+    country?: string
     path?: string
     referrer?: string
     created_at: string

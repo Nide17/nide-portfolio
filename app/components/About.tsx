@@ -1,5 +1,5 @@
 "use client"
-import { getClientIP, getDeviceInfo, trackDownload, getCountryFromIP, shouldTrackDownload, markDownloadTracked } from '../lib/api'
+import { getClientIP, getDeviceInfo, trackDownload, shouldTrackDownload, markDownloadTracked } from '../lib/api'
 
 const skills = [
     { name: 'React', mark: 'R', tone: 'from-sky-500 to-cyan-400' },
@@ -29,8 +29,7 @@ export default function About() {
                 return
             }
 
-            const country = await getCountryFromIP(ip)
-            const { browser, os, device } = getDeviceInfo()
+            const { browser, os, device, country } = await getDeviceInfo()
 
             const result = await trackDownload({
                 ip_address: ip,
@@ -47,7 +46,6 @@ export default function About() {
             }
         } catch (error) {
             console.error('Failed to track download:', error)
-            // Download still works even if tracking fails
         }
     }
 

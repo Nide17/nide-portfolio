@@ -34,7 +34,6 @@ export default function ForgotPasswordPage() {
         setLoading(true)
 
         try {
-            console.log('Sending forgot password request for:', email)
             await forgotPassword(email)
             setSuccess('Reset link sent to your email. Check your inbox (and spam folder).')
         } catch (submitError: any) {

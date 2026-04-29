@@ -23,6 +23,7 @@ export interface VisitPayload {
     device?: string
     operating_system?: string
     browser?: string
+    country?: string
     path?: string
     referrer?: string
 }
@@ -184,9 +185,13 @@ export function markDownloadTracked(ip: string) {
 // Helper to get country from IP address
 export async function getCountryFromIP(ip: string) {
     try {
-        const response = await fetch(`https://ipapi.co/${ip}/json/`)
+        const response = await fetch(`/api/ip-country?ip=${encodeURIComponent(ip)}`)
+        if (!response.ok) {
+            throw new Error(`Country lookup failed with status ${response.status}`)
+        }
+
         const data = await response.json()
-        return data.country_name || 'Unknown'
+        return data.country || 'Unknown'
     } catch (error) {
         console.error('Failed to get country:', error)
         return 'Unknown'
@@ -194,11 +199,16 @@ export async function getCountryFromIP(ip: string) {
 }
 
 // Helper to detect browser and OS from user agent
-export function getDeviceInfo() {
+export async function getDeviceInfo() {
     const ua = navigator.userAgent
     let browser = 'Unknown'
     let os = 'Unknown'
     let device = 'Desktop'
+    let country = 'Unknown'
+
+    const ip = await getClientIP()
+    country = await getCountryFromIP(ip)
+
 
     if (ua.indexOf('Win') > -1) os = 'Windows'
     else if (ua.indexOf('Mac') > -1) os = 'macOS'
@@ -214,7 +224,7 @@ export function getDeviceInfo() {
     if (/Mobile|Android|iPhone/.test(ua)) device = 'Mobile'
     else if (/Tablet|iPad/.test(ua)) device = 'Tablet'
 
-    return { browser, os, device }
+    return { browser, os, device, country }
 }
 
 // ===== PROJECTS =====

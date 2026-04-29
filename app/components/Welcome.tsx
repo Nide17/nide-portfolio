@@ -13,13 +13,14 @@ export default function Welcome() {
                     return
                 }
 
-                const { browser, os, device } = getDeviceInfo()
+                const { browser, os, device, country } = await getDeviceInfo()
 
                 const result = await trackVisit({
                     ip_address: ip,
                     device,
                     operating_system: os,
                     browser,
+                    country,
                     path: '/',
                     referrer: document.referrer || undefined
                 })
