@@ -42,7 +42,7 @@ export default function Welcome() {
                 <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
                     <div className="text-center lg:text-left">
                         <div className="mb-5 sm:mb-6">
-                            <p className="mb-3 text-sm font-semibold tracking-[0.18em] text-sky-700 font-['Poppins',system-ui,sans-serif] sm:text-lg sm:tracking-[0.24em]">
+                            <p className="mb-3 text-sm font-semibold tracking-[0.18em] text-sky-700 font-['Poppins',system-ui,sans-serif] sm:text-3xl sm:tracking-[0.24em]">
                                 Hello, I&apos;m
                             </p>
                             <h1 className="bg-linear-to-r from-blue-600 via-sky-500 to-cyan-500 bg-clip-text text-3xl font-bold leading-[1.08] text-transparent font-['Poppins',system-ui,sans-serif] sm:text-5xl sm:leading-[1.05] lg:text-6xl">

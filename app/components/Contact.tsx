@@ -78,18 +78,18 @@ export default function Contact() {
                                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-blue-100">
                                     <LocationIcon className="w-5 h-5 text-blue-600" />
                                 </div>
-                                <span className="text-sm text-gray-700 sm:text-lg">Kigali, Rwanda</span>
+                                <span className="text-sm text-gray-700 sm:text-sm">Kigali, Rwanda</span>
                             </div>
                             <div className="flex items-center justify-center gap-4 rounded-2xl border border-sky-100 bg-white px-4 py-4 text-left shadow-sm sm:px-5 lg:justify-start">
                                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-rose-100">
                                     <EmailIcon className="w-5 h-5 text-rose-600" />
                                 </div>
                                 <div className="flex min-w-0 flex-1 items-center justify-between gap-3">
-                                    <span className="text-sm text-gray-700 sm:text-lg">Prefer email? Use the form or copy my address.</span>
+                                    <span className="text-xs text-gray-700 sm:text-sm">Prefer email? Use the form or copy my email.</span>
                                     <button
                                         type="button"
                                         onClick={onCopyEmail}
-                                        className="shrink-0 rounded-full border border-sky-200 bg-sky-50 px-3 py-1.5 text-xs font-semibold text-sky-700 transition-colors hover:bg-sky-100 sm:text-sm"
+                                        className="shrink-0 rounded-full border border-sky-200 bg-sky-50 px-3 py-1.5 text-xs font-semibold text-sky-700 transition-colors hover:bg-sky-100"
                                     >
                                         {emailCopied ? 'Copied' : 'Copy email'}
                                     </button>
@@ -98,12 +98,12 @@ export default function Contact() {
                         </div>
 
                         <div className="mt-10 rounded-3xl border border-white/70 bg-white/80 p-6 shadow-[0_20px_60px_-35px_rgba(14,116,144,0.45)] backdrop-blur-sm sm:mt-12 sm:p-7">
-                            <h3 className="mb-6 bg-linear-to-r from-blue-600 via-sky-500 to-cyan-500 bg-clip-text text-center text-xl font-bold text-transparent font-['Poppins',system-ui,sans-serif] sm:text-3xl lg:text-left">
+                            <h3 className="mb-6 bg-linear-to-r from-blue-600 via-sky-500 to-cyan-500 bg-clip-text text-center text-xl font-bold text-transparent font-['Poppins',system-ui,sans-serif] sm:text-3xl">
                                 Connect with me
                             </h3>
-                            <div className="flex justify-center gap-4 sm:gap-5 lg:justify-start">
+                            <div className="flex justify-center gap-4 sm:gap-5">
                                 <a
-                                    href="https://www.linkedin.com/in/niyomwungeri-parmenide-ishimwe-1a5394123/"
+                                    href="https://www.linkedin.com/in/niyomwungeri-parmenide-ishimwe-1a5394123"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="group flex h-14 w-14 items-center justify-center rounded-2xl bg-linear-to-br from-blue-600 to-sky-500 shadow-[0_18px_40px_-20px_rgba(37,99,235,0.8)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_48px_-18px_rgba(37,99,235,0.85)]"
@@ -184,7 +184,7 @@ export default function Contact() {
                                     value={state.message}
                                     onChange={onChangeHandler}
                                     required
-                                    className="w-full resize-none rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4 text-sm font-['Poppins',system-ui,sans-serif] text-slate-800 shadow-sm transition-all duration-300 placeholder:text-sm placeholder:text-slate-400 focus:border-sky-400 focus:bg-white focus:outline-none focus:ring-4 focus:ring-sky-100 sm:px-6 sm:py-5 sm:text-lg sm:placeholder:text-lg lg:min-h-[12rem] lg:flex-1"
+                                    className="w-full resize-none rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4 text-sm font-['Poppins',system-ui,sans-serif] text-slate-800 shadow-sm transition-all duration-300 placeholder:text-sm placeholder:text-slate-400 focus:border-sky-400 focus:bg-white focus:outline-none focus:ring-4 focus:ring-sky-100 sm:px-6 sm:py-5 sm:text-lg sm:placeholder:text-lg lg:min-h-48 lg:flex-1"
                                 />
                             </div>
                             <button
